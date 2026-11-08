@@ -146,13 +146,7 @@ function PlayableVideoCard({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [videoError, setVideoError] = useState(false);
-
-  // In production deployments where heavy raw MP4s are excluded from Git,
-  // stream directly from Google Drive preview or the local path if present
-  const videoSrc = videoError
-    ? `https://drive.google.com/file/d/${asset.driveFileId}/preview`
-    : (asset.localPath || `https://drive.google.com/file/d/${asset.driveFileId}/preview`);
+  const [showEmbed, setShowEmbed] = useState(false);
 
   const setRefs = (el: HTMLVideoElement | null) => {
     localRef.current = el;
@@ -161,10 +155,14 @@ function PlayableVideoCard({
 
   const togglePlay = () => {
     const el = localRef.current;
-    if (!el) return;
+    if (!el) {
+      setShowEmbed(true);
+      return;
+    }
     if (el.paused) {
       el.play().catch(() => {
-        setVideoError(true);
+        // Local file does not exist on CDN, switch directly to Drive embed
+        setShowEmbed(true);
       });
     } else {
       el.pause();
@@ -196,15 +194,24 @@ function PlayableVideoCard({
           : "border-white/10 bg-carbon hover:border-brandPurple/50"
       }`}
     >
-      {!videoError ? (
+      {showEmbed ? (
+        <div className="relative w-full bg-obsidian flex items-center justify-center overflow-hidden aspect-[9/16] max-h-[540px]">
+          <iframe
+            src={`https://drive.google.com/file/d/${asset.driveFileId}/preview`}
+            title={`${industryTitle} — Reel 0${index + 1}`}
+            allow="autoplay; encrypted-media; fullscreen"
+            className="h-full w-full border-0"
+          />
+        </div>
+      ) : (
         <div className="relative w-full bg-obsidian flex items-center justify-center overflow-hidden aspect-[9/16] max-h-[540px]">
           <video
             ref={setRefs}
             src={asset.localPath!}
             poster={asset.posterPath || undefined}
-            preload="metadata"
+            preload="none"
             playsInline
-            controls
+            controls={isPlaying}
             onPlay={() => {
               setIsPlaying(true);
               setIsLoading(false);
@@ -228,12 +235,13 @@ function PlayableVideoCard({
                 setIsMuted(localRef.current.muted);
               }
             }}
-            onError={() => setVideoError(true)}
+            onError={() => setShowEmbed(true)}
             aria-label={`${industryTitle} — Reel 0${index + 1}`}
-            className="h-full w-full object-contain"
+            className="h-full w-full object-contain cursor-pointer"
+            onClick={togglePlay}
           />
 
-          {/* Centered Custom-Branded Play Button & Loading Indicator */}
+          {/* Centered Custom-Branded Play Button */}
           {!isPlaying && !isLoading && (
             <button
               type="button"
@@ -254,7 +262,7 @@ function PlayableVideoCard({
             </div>
           )}
 
-          {/* Custom Accessible Quick-Action Overlay Bar at Top */}
+          {/* Top Quick Bar */}
           <div className="pointer-events-none absolute inset-x-0 top-0 flex items-center justify-between bg-gradient-to-b from-black/85 via-black/35 to-transparent p-3.5">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/65 backdrop-blur-md px-3 py-1 text-xs font-medium text-alabaster">
               <span
@@ -305,15 +313,6 @@ function PlayableVideoCard({
               </button>
             </div>
           </div>
-        </div>
-      ) : (
-        <div className="relative w-full bg-obsidian flex items-center justify-center overflow-hidden aspect-[9/16] max-h-[540px]">
-          <iframe
-            src={`https://drive.google.com/file/d/${asset.driveFileId}/preview`}
-            title={`${industryTitle} — Reel 0${index + 1}`}
-            allow="autoplay; encrypted-media; fullscreen"
-            className="h-full w-full border-0"
-          />
         </div>
       )}
     </article>
