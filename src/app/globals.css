@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-primary: #000000;
+  --background-secondary: #0D0D0F;
+  --surface-card: #151519;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B7B7BF;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --brand-blue: #14ACF3;
+  --brand-purple: #8145CA;
+  --brand-pink: #F3398D;
+  --brand-orange: #FF7538;
+  --brand-gradient: linear-gradient(
+    110deg,
+    #14ACF3 0%,
+    #8145CA 35%,
+    #F3398D 68%,
+    #FF7538 100%
+  );
+  --brand-gradient-reverse: linear-gradient(
+    110deg,
+    #FF7538 0%,
+    #F3398D 32%,
+    #8145CA 65%,
+    #14ACF3 100%
+  );
+}
+
+html {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .text-brand-gradient {
+    background-image: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .bg-brand-gradient {
+    background-image: var(--brand-gradient);
+  }
+
+  .bg-brand-gradient-subtle {
+    background-image: linear-gradient(
+      110deg,
+      rgba(20, 172, 243, 0.14) 0%,
+      rgba(129, 69, 202, 0.14) 35%,
+      rgba(243, 57, 141, 0.14) 68%,
+      rgba(255, 117, 56, 0.14) 100%
+    );
+  }
+}
+
+/* Keyframes for restrained GPU-friendly entrance animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* Respect prefers-reduced-motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
