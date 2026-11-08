@@ -148,8 +148,11 @@ function PlayableVideoCard({
   const [isMuted, setIsMuted] = useState(false);
   const [videoError, setVideoError] = useState(false);
 
-  const isAvailable =
-    asset.status === "verified" && Boolean(asset.localPath) && !videoError;
+  // In production deployments where heavy raw MP4s are excluded from Git,
+  // stream directly from Google Drive preview or the local path if present
+  const videoSrc = videoError
+    ? `https://drive.google.com/file/d/${asset.driveFileId}/preview`
+    : (asset.localPath || `https://drive.google.com/file/d/${asset.driveFileId}/preview`);
 
   const setRefs = (el: HTMLVideoElement | null) => {
     localRef.current = el;
@@ -193,7 +196,7 @@ function PlayableVideoCard({
           : "border-white/10 bg-carbon hover:border-brandPurple/50"
       }`}
     >
-      {isAvailable ? (
+      {!videoError ? (
         <div className="relative w-full bg-obsidian flex items-center justify-center overflow-hidden aspect-[9/16] max-h-[540px]">
           <video
             ref={setRefs}
@@ -304,19 +307,13 @@ function PlayableVideoCard({
           </div>
         </div>
       ) : (
-        <div
-          data-testid={`unavailable-video-${asset.id}`}
-          className="flex aspect-[9/16] max-h-[460px] flex-col items-center justify-center p-6 text-center bg-carbon"
-        >
-          <span className="text-xs font-mono font-bold uppercase tracking-widest text-brand-gradient">
-            {copy.videosPage.unavailableVideo}
-          </span>
-          <span className="mt-2 text-xs text-pewter">
-            {industryTitle} · #0{index + 1}
-          </span>
-          <span className="mt-1 text-[11px] text-pewter/60 break-all">
-            ID: {asset.driveFileId}
-          </span>
+        <div className="relative w-full bg-obsidian flex items-center justify-center overflow-hidden aspect-[9/16] max-h-[540px]">
+          <iframe
+            src={`https://drive.google.com/file/d/${asset.driveFileId}/preview`}
+            title={`${industryTitle} — Reel 0${index + 1}`}
+            allow="autoplay; encrypted-media; fullscreen"
+            className="h-full w-full border-0"
+          />
         </div>
       )}
     </article>
