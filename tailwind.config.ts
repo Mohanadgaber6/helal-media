@@ -29,14 +29,14 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-en-sans)", "system-ui", "sans-serif"],
+        sans: ["'Plus Jakarta Sans'", "system-ui", "sans-serif"],
         display: [
-          "var(--font-en-display)",
-          "var(--font-en-sans)",
+          "'Syne'",
+          "'Plus Jakarta Sans'",
           "system-ui",
           "sans-serif",
         ],
-        arabic: ["var(--font-ar-sans)", "system-ui", "sans-serif"],
+        arabic: ["'IBM Plex Sans Arabic'", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         editorial: "-0.035em",

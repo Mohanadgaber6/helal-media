@@ -1,29 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import { Plus_Jakarta_Sans, Syne, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-en-sans",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
-
-const syne = Syne({
-  subsets: ["latin"],
-  variable: "--font-en-display",
-  display: "swap",
-  weight: ["700", "800"],
-});
-
-const ibmPlexArabic = IBM_Plex_Sans_Arabic({
-  subsets: ["arabic"],
-  variable: "--font-ar-sans",
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -69,7 +47,6 @@ export default function RootLayout({
     <html
       lang={locale}
       dir={dir}
-      className={`${plusJakarta.variable} ${syne.variable} ${ibmPlexArabic.variable}`}
       suppressHydrationWarning
     >
       <body
