@@ -118,40 +118,6 @@ export function WorkFolders({
           data-testid="work-folders-triangle"
           className="relative mx-auto max-w-5xl"
         >
-          {/* Subtle SVG geometric triangle connector visible on desktop with flowing energy */}
-          <svg
-            viewBox="0 0 1000 620"
-            fill="none"
-            aria-hidden="true"
-            className="pointer-events-none hidden md:block absolute inset-0 w-full h-full opacity-70"
-          >
-            <path
-              d="M230 170 L770 170 L500 470 Z"
-              stroke="url(#triangleBrandGrad)"
-              strokeWidth="2"
-              strokeDasharray="10 8"
-              className="animate-[dashFlow_5s_linear_infinite]"
-            />
-            <circle cx="230" cy="170" r="6" fill="#14ACF3" className="animate-pulse" />
-            <circle cx="770" cy="170" r="6" fill="#F3398D" className="animate-pulse" />
-            <circle cx="500" cy="470" r="6" fill="#FF7538" className="animate-pulse" />
-            <defs>
-              <linearGradient
-                id="triangleBrandGrad"
-                x1="0"
-                y1="0"
-                x2="1000"
-                y2="620"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop offset="0%" stopColor="#14ACF3" stopOpacity="0.75" />
-                <stop offset="35%" stopColor="#8145CA" stopOpacity="0.65" />
-                <stop offset="68%" stopColor="#F3398D" stopOpacity="0.65" />
-                <stop offset="100%" stopColor="#FF7538" stopOpacity="0.75" />
-              </linearGradient>
-            </defs>
-          </svg>
-
           {/* Upper Row: Upper Left (Designs) & Upper Right (Videos) */}
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8 items-start">
             <motion.div

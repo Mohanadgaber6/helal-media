@@ -128,10 +128,6 @@ export function AboutSection({ lang }: { lang: Locale }) {
                       {country.flagSvg}
                     </span>
                     <span>{country.label[lang]}</span>
-                    <span
-                      aria-hidden="true"
-                      className="h-1.5 w-1.5 rounded-full bg-brandBlue animate-pulse"
-                    />
                   </div>
                 ))}
               </div>

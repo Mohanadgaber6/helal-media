@@ -105,12 +105,14 @@ export function Hero({ lang }: { lang: Locale }) {
           </motion.h1>
 
           {/* 3. Signature Brand Slogan in Website Brand Gradient & Geometric Arabic Font */}
-          <motion.div
+          <motion.p
+            dir="rtl"
+            data-testid="hero-slogan-ar"
             initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
             animate={
               prefersReducedMotion
                 ? undefined
-                : { opacity: 1, y: [0, -6, 0] }
+                : { opacity: 1, y: [0, -5, 0] }
             }
             transition={{
               opacity: { duration: 0.65, delay: 0.22, ease: easeOutExpo },
@@ -121,22 +123,10 @@ export function Hero({ lang }: { lang: Locale }) {
                 ease: "easeInOut",
               },
             }}
-            className="mt-7 sm:mt-9 inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-2.5 backdrop-blur-md shadow-[0_12px_32px_rgba(129,69,202,0.16)]"
+            className="mt-6 sm:mt-8 inline-block font-arabic text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wide text-brand-gradient"
           >
-            <span
-              aria-hidden="true"
-              className="text-brandPink text-base animate-spin"
-            >
-              ✦
-            </span>
-            <p
-              dir="rtl"
-              data-testid="hero-slogan-ar"
-              className="font-arabic text-xl sm:text-2xl md:text-3xl font-extrabold tracking-wide text-brand-gradient"
-            >
-              التسويق ملوش كتالوج
-            </p>
-          </motion.div>
+            التسويق ملوش كتالوج
+          </motion.p>
         </div>
       </div>
 

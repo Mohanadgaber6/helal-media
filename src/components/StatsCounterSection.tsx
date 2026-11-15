@@ -251,17 +251,11 @@ export function StatsCounterSection({ lang }: { lang: Locale }) {
                 </p>
               </div>
 
-              {/* Bottom Icon Badge with Spinning Orbital Ring */}
+              {/* Bottom Icon Badge */}
               <div className="relative z-10 mt-8 flex items-center justify-between">
-                <div className="relative inline-flex items-center justify-center">
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute -inset-1.5 rounded-full border border-dashed border-brandBlue/50 animate-spin [animation-duration:10s]"
-                  />
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-brandPurple/40 bg-brandPurple/15 text-brandBlue shadow-[0_0_24px_rgba(129,69,202,0.35)] transition-transform duration-300 group-hover:scale-110 group-hover:border-brandBlue">
-                    {card.icon}
-                  </span>
-                </div>
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-brandPurple/40 bg-brandPurple/15 text-brandBlue shadow-[0_0_24px_rgba(129,69,202,0.35)] transition-transform duration-300 group-hover:scale-110 group-hover:border-brandBlue">
+                  {card.icon}
+                </span>
                 <span className="font-mono text-xs font-bold uppercase tracking-widest text-white/25">
                   0{idx + 1}
                 </span>
