@@ -18,6 +18,8 @@ export function ServiceCard({
   slotName?: "left" | "center" | "right";
 }) {
   const isFocal = variant === "focal";
+  const floatDelay =
+    slotName === "left" ? "0s" : slotName === "center" ? "0.7s" : "1.4s";
 
   return (
     <article
@@ -26,7 +28,10 @@ export function ServiceCard({
         slotName ? `service-preview-card-${slotName}` : `service-card-${service.slug}`
       }
       data-focal={isFocal ? "true" : "false"}
+      style={slotName ? { animationDelay: floatDelay } : undefined}
       className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl transition-all duration-300 ${
+        slotName ? "animate-[floatY_5.5s_ease-in-out_infinite]" : ""
+      } ${
         isFocal
           ? "z-20 border border-brandPurple/60 bg-gradient-to-b from-[#1C1B24] to-[#121217] p-8 sm:p-10 lg:p-12 shadow-focal md:scale-[1.06] lg:scale-[1.08] md:-translate-y-4"
           : variant === "side"
@@ -34,12 +39,18 @@ export function ServiceCard({
           : "border border-white/10 bg-slateStudio p-7 sm:p-9 hover:border-brandBlue/50 hover:bg-[#191920] hover:-translate-y-1"
       }`}
     >
-      {/* Top multicolor gradient accent bar on focal card */}
+      {/* Top multicolor gradient accent bar + sweeping light sheen on focal card */}
       {isFocal && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-brand-gradient"
-        />
+        <>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-brand-gradient"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent animate-[shimmerSweep_6s_ease-in-out_infinite]"
+          />
+        </>
       )}
 
       {/* Top Row: Icon + Focal Badge or Index */}

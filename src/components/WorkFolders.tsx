@@ -118,19 +118,23 @@ export function WorkFolders({
           data-testid="work-folders-triangle"
           className="relative mx-auto max-w-5xl"
         >
-          {/* Subtle SVG geometric triangle connector visible on desktop */}
+          {/* Subtle SVG geometric triangle connector visible on desktop with flowing energy */}
           <svg
             viewBox="0 0 1000 620"
             fill="none"
             aria-hidden="true"
-            className="pointer-events-none hidden md:block absolute inset-0 w-full h-full opacity-45"
+            className="pointer-events-none hidden md:block absolute inset-0 w-full h-full opacity-70"
           >
             <path
               d="M230 170 L770 170 L500 470 Z"
               stroke="url(#triangleBrandGrad)"
-              strokeWidth="1.5"
-              strokeDasharray="6 6"
+              strokeWidth="2"
+              strokeDasharray="10 8"
+              className="animate-[dashFlow_5s_linear_infinite]"
             />
+            <circle cx="230" cy="170" r="6" fill="#14ACF3" className="animate-pulse" />
+            <circle cx="770" cy="170" r="6" fill="#F3398D" className="animate-pulse" />
+            <circle cx="500" cy="470" r="6" fill="#FF7538" className="animate-pulse" />
             <defs>
               <linearGradient
                 id="triangleBrandGrad"
@@ -268,7 +272,13 @@ function FolderInteractiveCard({
       className="group relative block focus:outline-none focus-visible:ring-2 focus-visible:ring-brandBlue rounded-3xl"
     >
       {/* Sculpted Folder Container */}
-      <div className="relative pt-5 transition-transform duration-300 group-hover:-translate-y-2">
+      <div
+        style={{
+          animationDelay:
+            indexNumber === "01" ? "0s" : indexNumber === "02" ? "0.8s" : "1.6s",
+        }}
+        className="relative pt-5 animate-[floatY_5.2s_ease-in-out_infinite] transition-transform duration-300 group-hover:-translate-y-2.5"
+      >
         {/* Folder Back Plate + Top Tab */}
         <div
           aria-hidden="true"

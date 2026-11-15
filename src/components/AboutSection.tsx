@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { Locale } from "@/data/types";
 import { getCopy } from "@/data/content";
+import { FloatingBackground } from "./FloatingBackground";
 
 export function AboutSection({ lang }: { lang: Locale }) {
   const copy = getCopy(lang);
@@ -17,7 +18,8 @@ export function AboutSection({ lang }: { lang: Locale }) {
       data-testid="about-section"
       className="relative scroll-mt-24 border-b border-white/[0.08] bg-carbon py-24 sm:py-32 lg:py-40 overflow-hidden"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <FloatingBackground variant="section" />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 items-start">
           {/* Section Index / Label */}
           <motion.div
@@ -115,16 +117,21 @@ export function AboutSection({ lang }: { lang: Locale }) {
                 {lang === "ar" ? "تواجدنا الإقليمي" : "Serving Brands Across"}
               </p>
               <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-                {REGIONAL_COUNTRIES.map((country) => (
+                {REGIONAL_COUNTRIES.map((country, idx) => (
                   <div
                     key={country.code}
                     data-testid={`about-country-${country.code}`}
-                    className="group inline-flex items-center gap-2.5 rounded-full border border-white/12 bg-white/[0.03] px-4 py-2 text-xs sm:text-sm font-semibold text-alabaster transition-all duration-300 hover:border-brandBlue/50 hover:bg-white/[0.07] hover:-translate-y-0.5"
+                    style={{ animationDelay: `${idx * 0.45}s` }}
+                    className="group inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.04] px-4 py-2 text-xs sm:text-sm font-semibold text-alabaster shadow-[0_8px_24px_rgba(0,0,0,0.35)] animate-[floatY_4.2s_ease-in-out_infinite] transition-all duration-300 hover:border-brandBlue/60 hover:bg-white/[0.08] hover:scale-105"
                   >
-                    <span className="inline-flex h-5 w-7 overflow-hidden rounded-[4px] border border-white/15 shadow-sm shrink-0">
+                    <span className="inline-flex h-5 w-7 overflow-hidden rounded-[4px] border border-white/15 shadow-sm shrink-0 transition-transform duration-300 group-hover:scale-110">
                       {country.flagSvg}
                     </span>
                     <span>{country.label[lang]}</span>
+                    <span
+                      aria-hidden="true"
+                      className="h-1.5 w-1.5 rounded-full bg-brandBlue animate-pulse"
+                    />
                   </div>
                 ))}
               </div>

@@ -8,6 +8,7 @@ import { IntroOverlay } from "@/components/IntroOverlay";
 import { LocaleDocumentSync } from "@/components/LocaleDocumentSync";
 import { SoundProvider } from "@/components/SoundProvider";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
+import { InteractiveMotionLayer } from "@/components/InteractiveMotionLayer";
 
 export function generateStaticParams() {
   return SUPPORTED_LOCALES.map((lang) => ({ lang }));
@@ -37,6 +38,7 @@ export default function LocaleLayout({
     >
       <SoundProvider>
         <LocaleDocumentSync lang={lang} />
+        <InteractiveMotionLayer />
         <IntroOverlay lang={lang} />
         <SiteHeader lang={lang} />
         <main id="main-content" className="flex-1 animate-[fadeIn_0.35s_ease-out]">

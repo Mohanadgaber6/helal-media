@@ -49,11 +49,20 @@ body {
 
 @layer utilities {
   .text-brand-gradient {
-    background-image: var(--brand-gradient);
+    background-image: linear-gradient(
+      110deg,
+      #14ACF3 0%,
+      #8145CA 25%,
+      #F3398D 50%,
+      #FF7538 75%,
+      #14ACF3 100%
+    );
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     color: transparent;
+    animation: gradientFlow 6s linear infinite;
   }
 
   .bg-brand-gradient {
@@ -68,6 +77,60 @@ body {
       rgba(243, 57, 141, 0.14) 68%,
       rgba(255, 117, 56, 0.14) 100%
     );
+  }
+}
+
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes floatY {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(3deg);
+  }
+}
+
+@keyframes dashFlow {
+  0% {
+    stroke-dashoffset: 120;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-120%) skewX(-18deg);
+  }
+  50%, 100% {
+    transform: translateX(220%) skewX(-18deg);
   }
 }
 
