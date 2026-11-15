@@ -29,14 +29,16 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["'Plus Jakarta Sans'", "system-ui", "sans-serif"],
+        sans: ["'Plus Jakarta Sans'", "'Readex Pro'", "'Cairo'", "system-ui", "sans-serif"],
         display: [
           "'Syne'",
+          "'Cairo'",
+          "'Readex Pro'",
           "'Plus Jakarta Sans'",
           "system-ui",
           "sans-serif",
         ],
-        arabic: ["'IBM Plex Sans Arabic'", "system-ui", "sans-serif"],
+        arabic: ["'Cairo'", "'Readex Pro'", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         editorial: "-0.035em",

@@ -1,21 +1,35 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { Locale } from "@/data/types";
 import { getCopy, HOME_FEATURED_SERVICES } from "@/data/content";
 import { ServiceCard } from "./ServiceCard";
+import { FloatingBackground } from "./FloatingBackground";
 
 export function ServicesPreview({ lang }: { lang: Locale }) {
   const copy = getCopy(lang);
   const { left, center, right } = HOME_FEATURED_SERVICES;
+  const prefersReducedMotion = useReducedMotion();
+  const easeOutExpo: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
   return (
     <section
       data-testid="services-preview-section"
       className="relative border-b border-white/[0.08] bg-obsidian py-24 sm:py-32 lg:py-40 overflow-hidden"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <FloatingBackground variant="section" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mx-auto max-w-3xl text-center mb-16 sm:mb-24">
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6, ease: easeOutExpo }}
+          className="mx-auto max-w-3xl text-center mb-16 sm:mb-24"
+        >
           <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-brand-gradient mb-3">
             {copy.servicesPreview.smallTitle}
           </p>
@@ -31,7 +45,7 @@ export function ServicesPreview({ lang }: { lang: Locale }) {
           <p className="text-base sm:text-lg text-pewter leading-relaxed">
             {copy.servicesPreview.description}
           </p>
-        </div>
+        </motion.div>
 
         {/*
           Three Featured Cards Geometry (Section 3.3):
@@ -47,7 +61,13 @@ export function ServicesPreview({ lang }: { lang: Locale }) {
           className="grid grid-cols-1 gap-8 md:grid-cols-3 md:items-center lg:gap-10"
         >
           {/* LEFT: Branding */}
-          <div className="order-2 md:order-1">
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 28 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.08, ease: easeOutExpo }}
+            className="order-2 md:order-1"
+          >
             <ServiceCard
               service={left}
               lang={lang}
@@ -55,10 +75,16 @@ export function ServicesPreview({ lang }: { lang: Locale }) {
               slotName="left"
               indexLabel="01"
             />
-          </div>
+          </motion.div>
 
           {/* CENTER: Social Media Management (Focal Point — Larger & Closer) */}
-          <div className="order-1 md:order-2">
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 28 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6, ease: easeOutExpo }}
+            className="order-1 md:order-2"
+          >
             <ServiceCard
               service={center}
               lang={lang}
@@ -66,10 +92,16 @@ export function ServicesPreview({ lang }: { lang: Locale }) {
               slotName="center"
               featuredBadge={copy.servicesPreview.featuredBadge}
             />
-          </div>
+          </motion.div>
 
           {/* RIGHT: Content Strategy */}
-          <div className="order-3 md:order-3">
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 28 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.16, ease: easeOutExpo }}
+            className="order-3 md:order-3"
+          >
             <ServiceCard
               service={right}
               lang={lang}
@@ -77,20 +109,35 @@ export function ServicesPreview({ lang }: { lang: Locale }) {
               slotName="right"
               indexLabel="03"
             />
-          </div>
+          </motion.div>
         </div>
 
         {/* CTA: View all services */}
-        <div className="mt-16 sm:mt-24 text-center">
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.55, delay: 0.2, ease: easeOutExpo }}
+          className="mt-16 sm:mt-24 text-center"
+        >
           <Link
             href={`/${lang}/services`}
             data-testid="services-preview-view-all"
-            className="inline-flex items-center gap-3 rounded-full border border-brandBlue/45 bg-brand-gradient-subtle px-8 py-4 text-sm sm:text-base font-bold text-alabaster transition-all duration-200 hover:bg-brand-gradient hover:border-transparent hover:shadow-brandGlow hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brandBlue"
+            className="group inline-flex items-center gap-3 rounded-full border border-brandBlue/45 bg-brand-gradient-subtle px-8 py-4 text-sm sm:text-base font-bold text-alabaster transition-all duration-300 hover:bg-brand-gradient hover:border-transparent hover:shadow-brandGlow hover:-translate-y-0.5 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-brandBlue"
           >
             <span>{copy.servicesPreview.cta}</span>
-            <span aria-hidden="true">{lang === "ar" ? "←" : "→"}</span>
+            <span
+              aria-hidden="true"
+              className={`inline-block transition-transform duration-300 ${
+                lang === "ar"
+                  ? "group-hover:-translate-x-1"
+                  : "group-hover:translate-x-1"
+              }`}
+            >
+              {lang === "ar" ? "←" : "→"}
+            </span>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -6,6 +6,8 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { IntroOverlay } from "@/components/IntroOverlay";
 import { LocaleDocumentSync } from "@/components/LocaleDocumentSync";
+import { SoundProvider } from "@/components/SoundProvider";
+import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 
 export function generateStaticParams() {
   return SUPPORTED_LOCALES.map((lang) => ({ lang }));
@@ -33,14 +35,16 @@ export default function LocaleLayout({
         lang === "ar" ? "font-arabic" : "font-sans"
       }`}
     >
-      <LocaleDocumentSync lang={lang} />
-      <IntroOverlay lang={lang} />
-      <SiteHeader lang={lang} />
-      <main id="main-content" className="flex-1">
-        {children}
-      </main>
-      <SiteFooter lang={lang} />
+      <SoundProvider>
+        <LocaleDocumentSync lang={lang} />
+        <IntroOverlay lang={lang} />
+        <SiteHeader lang={lang} />
+        <main id="main-content" className="flex-1 animate-[fadeIn_0.35s_ease-out]">
+          {children}
+        </main>
+        <SiteFooter lang={lang} />
+        <FloatingWhatsApp lang={lang} />
+      </SoundProvider>
     </div>
   );
 }
-

@@ -4,6 +4,17 @@ const ARTIFACT_DIR =
   "C:/Users/ADMIN/.gemini/antigravity/brain/c6405892-644c-4191-872b-186e2f79b68c";
 
 test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () => {
+  test.beforeEach(async ({ page }) => {
+    // Prevent external Google Fonts CDN latency from blocking window 'load' event during headless E2E tests
+    await page.route(/fonts\.googleapis\.com|fonts\.gstatic\.com/i, async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "text/css",
+        body: "",
+      });
+    });
+  });
+
   test("1. Splash Intro, Skip Control, Internal Navigation No-Replay, Header, Footer & #about Cross-Route Navigation", async ({
     page,
   }) => {
@@ -15,7 +26,7 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
     await expect(introOverlay).toBeVisible();
     await expect(introOverlay.locator('img[src="/brand/helal-logo.svg"]')).toBeVisible();
     await expect(introOverlay).toContainText("Helal Media Production");
-    await expect(introOverlay).toContainText("Marketing Has No Catalog");
+    await expect(page.getByTestId("intro-slogan-ar")).toHaveText("التسويق ملوش كتالوج");
 
     // Verify official brand CSS variables and #000000 primary background
     const brandTokens = await page.evaluate(() => {
@@ -47,6 +58,30 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
     await expect(
       page.getByTestId("site-footer").locator('img[src="/brand/helal-logo.svg"]')
     ).toBeVisible();
+
+    // Task 4: Header Contact Us button beside Language Switcher
+    const headerContactCta = page.getByTestId("header-contact-cta");
+    await expect(headerContactCta).toBeVisible();
+    await expect(headerContactCta).toContainText("Contact Us");
+    await expect(headerContactCta).toHaveAttribute("href", "/en/contact");
+
+    // Task 6: Interactive Sound Toggle (OFF by default, toggles ON/OFF)
+    const soundToggle = page.getByTestId("sound-toggle");
+    await expect(soundToggle).toBeVisible();
+    await expect(soundToggle).toHaveAttribute("aria-pressed", "false");
+    await expect(soundToggle).toHaveAttribute("data-sound-state", "off");
+    await soundToggle.click();
+    await expect(soundToggle).toHaveAttribute("aria-pressed", "true");
+    await expect(soundToggle).toHaveAttribute("data-sound-state", "on");
+    await soundToggle.click();
+    await expect(soundToggle).toHaveAttribute("aria-pressed", "false");
+
+    // Task 5: Persistent Floating WhatsApp Button (EN LTR bottom-right)
+    const floatingWa = page.getByTestId("floating-whatsapp-button");
+    await expect(floatingWa).toBeVisible();
+    await expect(floatingWa).toHaveAttribute("href", "https://wa.me/201055515576");
+    const waBoxEn = await floatingWa.boundingBox();
+    expect(waBoxEn!.x).toBeGreaterThan(700);
 
     // Verify Footer official Instagram & Facebook links on Desktop
     const footerIg = page.getByTestId("footer-social-instagram");
@@ -84,9 +119,7 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
 
     // Global Footer contains exact email, all three phone numbers, and phone/WhatsApp action verification
     const footer = page.getByTestId("site-footer");
-    await expect(footer).toContainText(
-      "Marketing has no catalog — a full-service marketing agency"
-    );
+    await expect(footer).toContainText("التسويق ملوش كتالوج");
     await expect(footer).toContainText("helal.media0@gmail.com");
     await expect(footer).toContainText("+201055515576");
     await expect(footer).toContainText("+201158260899");
@@ -132,6 +165,7 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
     });
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.goto("/en");
+    await page.waitForTimeout(750);
 
     await page.screenshot({
       path: `${ARTIFACT_DIR}/home-en-desktop.png`,
@@ -161,10 +195,16 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
       "href",
       "/en/contact"
     );
-    await expect(page.getByTestId("about-cta-see-projects")).toHaveAttribute(
-      "href",
-      "/en/work"
-    );
+    await expect(
+      page.getByTestId("about-cta-see-projects")
+    ).toHaveAttribute("href", "/en/work");
+
+    // Item 2: Verify 4 Country Flags under About Us (Egypt, Saudi Arabia, UAE, Kuwait)
+    await expect(page.getByTestId("about-countries-row")).toBeVisible();
+    await expect(page.getByTestId("about-country-eg")).toContainText("Egypt");
+    await expect(page.getByTestId("about-country-sa")).toContainText("Saudi Arabia");
+    await expect(page.getByTestId("about-country-ae")).toContainText("UAE");
+    await expect(page.getByTestId("about-country-kw")).toContainText("Kuwait");
 
     // 3.3 Services Preview: Left = Branding, Center = Social Media Management (larger focal point), Right = Content Strategy
     const leftCard = page.getByTestId("service-preview-card-left");
@@ -199,6 +239,57 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
     expect(wBox!.y).toBeGreaterThan(dBox!.y + 40);
     expect(wBox!.x).toBeGreaterThan(dBox!.x);
     expect(wBox!.x).toBeLessThan(vBox!.x);
+
+    // Item 8: KPI Counter Section ("Numbers That Speak For Themselves") after Client Work
+    const statsSection = page.getByTestId("stats-counter-section");
+    await expect(statsSection).toBeVisible();
+    await expect(page.getByTestId("stats-counter-heading")).toContainText(
+      "Numbers That Speak For Themselves"
+    );
+    await expect(page.getByTestId("stats-counter-subheading")).toHaveText(
+      "Every brand gets a plan built from scratch, measured by real impact"
+    );
+    await expect(page.getByTestId("kpi-card-agency")).toContainText("Agency");
+    await expect(page.getByTestId("kpi-card-agency")).toContainText(
+      "From idea to results, one team takes care of it all, so you don’t have to chase anyone."
+    );
+    await expect(page.getByTestId("kpi-card-services")).toContainText("services");
+    await expect(page.getByTestId("kpi-card-services")).toContainText(
+      "Under one roof: branding, social media, content, design, video, web, and paid ads"
+    );
+    await expect(page.getByTestId("kpi-card-campaigns")).toContainText("campaigns");
+    await expect(page.getByTestId("kpi-card-campaigns")).toContainText(
+      "Launched across social media, paid ads, and content for brands that wanted more than a template"
+    );
+
+    // Item 9: Why Choose Us 4 horizontal cards on desktop
+    const card1Box = await page.getByTestId("why-us-card-no-templates").boundingBox();
+    const card2Box = await page.getByTestId("why-us-card-everything-under-one-roof").boundingBox();
+    expect(card1Box!.x).toBeLessThan(card2Box!.x);
+
+    // Item 10: Closing CTA + Bottom "Get in Touch" Section
+    await expect(page.getByTestId("get-in-touch-section")).toBeVisible();
+    await expect(page.getByTestId("git-card-intro")).toContainText(
+      "Tell us about your brand and we’ll build a plan around it. Reach out directly and our team will get back to you within 24 hours"
+    );
+    await expect(page.getByTestId("git-card-whatsapp")).toContainText(
+      "WHATSAPP : +201055515576"
+    );
+    await expect(page.getByTestId("git-card-whatsapp")).toHaveAttribute(
+      "href",
+      "https://wa.me/201055515576"
+    );
+    await expect(page.getByTestId("git-card-email")).toContainText(
+      "helal.media0@gmail.com"
+    );
+    await expect(page.getByTestId("git-social-facebook")).toHaveAttribute(
+      "href",
+      "https://www.facebook.com/share/1Fku98K1qm/"
+    );
+    await expect(page.getByTestId("git-social-instagram")).toHaveAttribute(
+      "href",
+      "https://www.instagram.com/helal.media.production?vrfl=MW5ucWQzeHVtdjV2OQ=="
+    );
 
     // 3.5 Why Choose Us: 4 interactive reveal cards collapsed by default, toggle on click
     const firstTrigger = page.getByTestId("why-us-trigger-no-templates");
@@ -277,10 +368,13 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
       }
     );
 
-    // Work Hub
+    // Work Hub (Item 11: "Work by Our Team" + "Explore the work our team has delivered across different industries.")
     await page.goto("/en/work");
+    await expect(page.getByTestId("work-hub-heading")).toHaveText(
+      "Work by Our Team"
+    );
     await expect(page.getByTestId("work-hub-supporting-copy")).toHaveText(
-      "Discover how we’ve helped brands stand out and succeed."
+      "Explore the work our team has delivered across different industries."
     );
 
     // Navigate to Designs
@@ -290,6 +384,32 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
     await expect(page.getByTestId("collection-overview-label")).toHaveText(
       "Overview"
     );
+
+    // Item 12: Verify all 5 Interactive Design Showcase Boxes (34 showcase cards)
+    for (let b = 1; b <= 5; b++) {
+      await expect(page.getByTestId(`design-showcase-box-${b}`)).toBeVisible();
+    }
+    await expect(page.getByTestId("showcase-box-1-eyebrow")).toHaveText(
+      "BY OUR TEAM"
+    );
+    await expect(page.getByTestId("showcase-box-1-heading")).toHaveText(
+      "From social media designs to full brand identities, explore the work of our team."
+    );
+    await expect(page.getByTestId("showcase-box-2-heading")).toHaveText(
+      "Beauty, perfume, dental, and health: see how our team brings each brand to life."
+    );
+    await expect(page.getByTestId("showcase-box-3-heading")).toHaveText(
+      "From restaurants to cafes, explore the designs our team made to make every dish stand out."
+    );
+    await expect(page.getByTestId("showcase-box-4-heading")).toHaveText(
+      "Motivation starts with the first look. See how our team designs for fitness."
+    );
+    await expect(page.getByTestId("showcase-box-5-heading")).toHaveText(
+      "Designs that inspire learning and earn trust for every academy."
+    );
+    const showcaseCards = page.locator('[data-testid^="showcase-card-"]');
+    await expect(showcaseCards).toHaveCount(34);
+    await page.getByTestId("showcase-next-1").click();
 
     // Verify all 5 named design clients and 24 design cards
     const designCards = page.locator('[data-testid^="design-asset-card-"]');
@@ -307,10 +427,12 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
       "Verified Client Asset Unavailable"
     );
 
-    // Deterministically load & verify all 24 authentic client design images (including all 5 Ogien Dental Clinic images) with naturalWidth > 0
+    // Deterministically load & verify all 58 design images (34 interactive showcase + 24 client case studies) with naturalWidth > 0
     const imgAudit = await page.evaluate(async () => {
       const imgs = Array.from(
-        document.querySelectorAll('[data-testid^="design-asset-card-"] img')
+        document.querySelectorAll(
+          '[data-testid^="showcase-card-"] img, [data-testid^="design-asset-card-"] img'
+        )
       ) as HTMLImageElement[];
       await Promise.all(
         imgs.map((img) => {
@@ -334,7 +456,7 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
         naturalHeight: img.naturalHeight,
       }));
     });
-    expect(imgAudit.length).toBe(24);
+    expect(imgAudit.length).toBe(58);
     for (const item of imgAudit) {
       expect(item.src).toMatch(/^\/portfolio\/designs\/.+\.webp$/);
       expect(
@@ -371,21 +493,27 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
     await page.goto("/en/work/videos");
     await expect(page.getByTestId("collection-headline")).toHaveText("Videos");
     const videoCards = page.locator('[data-testid^="video-asset-card-"]');
-    await expect(videoCards).toHaveCount(21);
+    await expect(videoCards).toHaveCount(23);
     await expect(
       page.locator('[data-testid^="unavailable-video-"]')
     ).toHaveCount(0);
     await expect(
       page.locator('[data-testid^="video-asset-card-"] video')
-    ).toHaveCount(21);
+    ).toHaveCount(23);
+    await expect(
+      page.locator('[data-testid="video-thumbnail-cover"]')
+    ).toHaveCount(23);
     await expect(
       page.getByTestId("video-industry-heading-health-care")
     ).toHaveText("Health Care");
     await expect(
+      page.getByTestId("video-industry-count-health-care")
+    ).toHaveText("9 Films");
+    await expect(
       page.getByTestId("video-industry-heading-ai-characters")
-    ).toHaveText("AI Characters");
+    ).toHaveText("AI Content Production");
 
-    // Verify all 21 video elements use local /portfolio/videos/ paths and local /media/posters/ thumbnails, and verify HTTP 200 on every single one
+    // Verify all 23 video elements use local /portfolio/videos/ paths and local /media/posters/ thumbnails, and verify HTTP 200 on every single one
     const videoDomAudit = await page.evaluate(() => {
       const vids = Array.from(
         document.querySelectorAll('[data-testid^="video-asset-card-"] video')
@@ -395,7 +523,7 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
         poster: v.getAttribute("poster") || "",
       }));
     });
-    expect(videoDomAudit.length).toBe(21);
+    expect(videoDomAudit.length).toBe(23);
     for (const v of videoDomAudit) {
       expect(v.src).toMatch(/^\/portfolio\/videos\/.+\.mp4$/);
       expect(v.poster).toMatch(/^\/media\/posters\/.+\.webp$/);
@@ -408,8 +536,42 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
     // Verify that ZERO network requests were made to Google Drive across both Designs and Videos pages
     expect(attemptedGoogleDriveRequests).toEqual([]);
 
+    const healthCareSection = page.getByTestId("video-industry-section-health-care");
+    await healthCareSection.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(650);
+
+    // Verify play button is centered inside the first thumbnail cover
+    const firstCoverBox = await page
+      .locator('[data-testid="video-thumbnail-cover"]')
+      .first()
+      .boundingBox();
+    const firstPlayBox = await page
+      .locator('[data-testid="video-thumbnail-play-button"]')
+      .first()
+      .boundingBox();
+    expect(firstCoverBox).not.toBeNull();
+    expect(firstPlayBox).not.toBeNull();
+    const coverCenterX = firstCoverBox!.x + firstCoverBox!.width / 2;
+    const playCenterX = firstPlayBox!.x + firstPlayBox!.width / 2;
+    expect(Math.abs(coverCenterX - playCenterX)).toBeLessThan(8);
+
     await page.screenshot({
       path: `${ARTIFACT_DIR}/videos-en-desktop.png`,
+      fullPage: false,
+    });
+
+    const newDrMohamedCard = page.getByTestId("video-asset-card-video-health-care-9");
+    await newDrMohamedCard.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(450);
+    await newDrMohamedCard.screenshot({
+      path: `${ARTIFACT_DIR}/video-health-care-08-dr-mohamed.png`,
+    });
+
+    const aiSection = page.getByTestId("video-industry-section-ai-characters");
+    await aiSection.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(650);
+    await page.screenshot({
+      path: `${ARTIFACT_DIR}/videos-ai-content-en-desktop.png`,
       fullPage: false,
     });
 
@@ -677,6 +839,12 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
     await expect(
       page.getByTestId("site-header").getByTestId("helal-official-logo-full")
     ).toHaveAttribute("dir", "ltr");
+    // Verify Arabic Header Contact CTA and RTL Floating WhatsApp position (left side)
+    await expect(page.getByTestId("header-contact-cta")).toContainText("تواصل معنا");
+    await expect(page.getByTestId("header-contact-cta")).toHaveAttribute("href", "/ar/contact");
+    const waBoxAr = await page.getByTestId("floating-whatsapp-button").boundingBox();
+    expect(waBoxAr!.x).toBeLessThan(400);
+    await page.waitForTimeout(750);
     await page.screenshot({
       path: `${ARTIFACT_DIR}/home-ar-rtl-desktop.png`,
       fullPage: false,
@@ -689,6 +857,11 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
       for (const route of ["/en", "/ar", "/en/services", "/ar/contact"]) {
         await page.goto(route);
         if (width === 375 && route === "/ar") {
+          await page.waitForTimeout(750);
+          const menuBtnBox = await page.getByTestId("mobile-menu-toggle").boundingBox();
+          expect(menuBtnBox).not.toBeNull();
+          expect(menuBtnBox!.x).toBeGreaterThanOrEqual(0);
+          expect(menuBtnBox!.x + menuBtnBox!.width).toBeLessThanOrEqual(375);
           await page.screenshot({
             path: `${ARTIFACT_DIR}/home-ar-mobile-375.png`,
             fullPage: false,

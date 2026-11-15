@@ -7,6 +7,7 @@ import { Hero } from "@/components/Hero";
 import { AboutSection } from "@/components/AboutSection";
 import { ServicesPreview } from "@/components/ServicesPreview";
 import { WorkFolders } from "@/components/WorkFolders";
+import { StatsCounterSection } from "@/components/StatsCounterSection";
 import { WhyUsAccordion } from "@/components/WhyUsAccordion";
 import { FinalCTA } from "@/components/FinalCTA";
 
@@ -40,6 +41,7 @@ export default function HomePage({ params }: { params: { lang: string } }) {
       <AboutSection lang={lang} />
       <ServicesPreview lang={lang} />
       <WorkFolders lang={lang} mode="home" />
+      <StatsCounterSection lang={lang} />
       <WhyUsAccordion lang={lang} />
       <FinalCTA lang={lang} />
     </div>

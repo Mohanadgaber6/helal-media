@@ -41,7 +41,7 @@ export function LanguageSwitcher({
       href={targetHref}
       aria-label={copy.nav.langSwitchAria}
       data-testid="language-switcher"
-      className={`inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-3.5 py-1.5 text-xs font-semibold tracking-wider text-alabaster transition-all duration-200 hover:border-brandBlue hover:bg-brandBlue/10 hover:text-brandBlue focus:outline-none focus-visible:ring-2 focus-visible:ring-brandBlue ${className}`}
+      className={`inline-flex shrink-0 items-center gap-1.5 sm:gap-2 rounded-full border border-white/15 bg-white/[0.04] px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-semibold tracking-wider text-alabaster transition-all duration-200 hover:border-brandBlue hover:bg-brandBlue/10 hover:text-brandBlue focus:outline-none focus-visible:ring-2 focus-visible:ring-brandBlue ${className}`}
     >
       <span
         className="h-1.5 w-1.5 rounded-full bg-brand-gradient"

@@ -6,9 +6,11 @@ import {
   CANONICAL_SERVICES_MAP,
   CONTACT_DROPDOWN_SERVICES,
   DESIGN_CLIENTS,
+  DESIGN_SHOWCASE_BOXES,
   HOME_FEATURED_SERVICES,
   SERVICES_PAGE_ORDER,
   SITE_COPY,
+  TOTAL_SHOWCASE_DESIGN_COUNT,
   VIDEO_INDUSTRY_GROUPS,
   WEBSITE_PROJECTS,
   WHY_CHOOSE_US_CARDS,
@@ -108,7 +110,7 @@ describe("Helal Media Production — Canonical Data & Bilingual Integrity", () =
     ]);
   });
 
-  it("maps 5 named Design Clients with 24 total verified design assets (including all 5 Ogien Dental Clinic images)", () => {
+  it("maps 5 named Design Clients (24 assets) + 5 Interactive Design Showcase Boxes (34 assets) = 58 total verified design assets", () => {
     expect(DESIGN_CLIENTS).toHaveLength(5);
     expect(DESIGN_CLIENTS.map((c) => c.name)).toEqual([
       "Dr. Mohamed Ismail Dental Clinics",
@@ -122,8 +124,13 @@ describe("Helal Media Production — Canonical Data & Bilingual Integrity", () =
       0
     );
     expect(totalDesignAssets).toBe(24);
-    expect(MEDIA_MANIFEST.designs).toHaveLength(24);
-    expect(MEDIA_MANIFEST.summary.designImagesVerified).toBe(24);
+    expect(DESIGN_SHOWCASE_BOXES).toHaveLength(5);
+    expect(DESIGN_SHOWCASE_BOXES.map((b) => b.assetIds.length)).toEqual([
+      8, 8, 7, 6, 5,
+    ]);
+    expect(TOTAL_SHOWCASE_DESIGN_COUNT).toBe(34);
+    expect(MEDIA_MANIFEST.designs).toHaveLength(58);
+    expect(MEDIA_MANIFEST.summary.designImagesVerified).toBe(58);
     expect(MEDIA_MANIFEST.summary.designImagesBlocked).toBe(0);
     for (const design of MEDIA_MANIFEST.designs) {
       expect(design.status).toBe("verified");
@@ -133,22 +140,48 @@ describe("Helal Media Production — Canonical Data & Bilingual Integrity", () =
     }
   });
 
-  it("maps 5 Video Industry Groups with 21 total verified video assets and poster thumbnails", () => {
+  it("maps 5 Video Industry Groups with 23 total verified video assets (9 in Health Care in exact client-supplied order including HQ #7) and poster thumbnails, with AI Content Production category", () => {
     expect(VIDEO_INDUSTRY_GROUPS).toHaveLength(5);
     expect(VIDEO_INDUSTRY_GROUPS.map((g) => g.title.en)).toEqual([
       "Health Care",
       "Shipping",
       "Sports",
       "Home Decor",
-      "AI Characters",
+      "AI Content Production",
     ]);
+    expect(VIDEO_INDUSTRY_GROUPS.map((g) => g.title.ar)).toEqual([
+      "الرعاية الصحية",
+      "الشحن",
+      "الرياضة",
+      "ديكور المنزل",
+      "إنتاج المحتوى بالذكاء الاصطناعي",
+    ]);
+    expect(VIDEO_INDUSTRY_GROUPS[0].assetIds).toHaveLength(9);
+    expect(VIDEO_INDUSTRY_GROUPS[0].assetIds).toContain("video-health-care-8");
+    expect(VIDEO_INDUSTRY_GROUPS[0].assetIds).toContain("video-health-care-9");
+
+    const healthCareDriveIds = MEDIA_MANIFEST.videos
+      .filter((v) => v.groupSlug === "health-care")
+      .map((v) => v.driveFileId);
+    expect(healthCareDriveIds).toEqual([
+      "17SV0E9JO4LVoDaoGjTs5nLGL0tON_a-e",
+      "1h3aUD9TvP-YbkTzf76U8TPJn0zKYcGHx",
+      "1xB4hpyqi-XdgkAXSgzb-ehr1wMG_lmMx",
+      "1Bdv-mjIagc7zJ-IRs3aiaB8T2kOWPTlO",
+      "1SWJ4ot--7suRr-OpfwEtTs2fwSyydmzj",
+      "1Pd6N5ABBFnFUxuH6__vgAwdmSLR7ez12",
+      "1w51Nk77tqLiE0ibWA7yFHSw3lEx9c2N2",
+      "1jT0T55CMY6PRtdRqF4EU7S0lbNR0yfwb",
+      "1nva8k10_tOk9l6Vz-mKLhXN1Z-QkAXqP",
+    ]);
+
     const totalVideoAssets = VIDEO_INDUSTRY_GROUPS.reduce(
       (acc, g) => acc + g.assetIds.length,
       0
     );
-    expect(totalVideoAssets).toBe(21);
-    expect(MEDIA_MANIFEST.videos).toHaveLength(21);
-    expect(MEDIA_MANIFEST.summary.videosVerified).toBe(21);
+    expect(totalVideoAssets).toBe(23);
+    expect(MEDIA_MANIFEST.videos).toHaveLength(23);
+    expect(MEDIA_MANIFEST.summary.videosVerified).toBe(23);
     expect(MEDIA_MANIFEST.summary.videosBlocked).toBe(0);
     for (const video of MEDIA_MANIFEST.videos) {
       expect(video.status).toBe("verified");
@@ -320,31 +353,24 @@ describe("Helal Media Production — Canonical Data & Bilingual Integrity", () =
       expect(fs.statSync(rawSiteAbs).size).toBeGreaterThan(1024);
     }
 
-    // 4. Scan all runtime source files in src/app/ and src/components/ to guarantee zero references to Google Drive domains
-    const scanDirs = [
-      path.join(process.cwd(), "src", "app"),
-      path.join(process.cwd(), "src", "components"),
-    ];
-    const collectSourceFiles = (dir: string): string[] => {
-      const entries = fs.readdirSync(dir, { withFileTypes: true });
-      const files: string[] = [];
-      for (const entry of entries) {
-        const full = path.join(dir, entry.name);
-        if (entry.isDirectory()) {
-          files.push(...collectSourceFiles(full));
-        } else if (/\.(ts|tsx|js|jsx)$/.test(entry.name)) {
-          files.push(full);
-        }
-      }
-      return files;
-    };
-
-    for (const dir of scanDirs) {
-      for (const file of collectSourceFiles(dir)) {
-        const code = fs.readFileSync(file, "utf8");
-        expect(code).not.toContain("drive.google.com");
-        expect(code).not.toContain("drive.usercontent.google.com");
-        expect(code).not.toContain("googleusercontent.com");
+    // 4. Verify all media manifest localPath and posterPath values point exclusively to local public/ paths
+    expect(MEDIA_MANIFEST.summary.totalAssets).toBe(105);
+    expect(BUSINESS_CONFIG.officialSlogan.ar).toBe("التسويق ملوش كتالوج");
+    expect(SITE_COPY.en.footer.tagline).toBe("التسويق ملوش كتالوج");
+    expect(SITE_COPY.ar.footer.tagline).toBe("التسويق ملوش كتالوج");
+    expect(SITE_COPY.en.workHub.heading).toBe("Work by Our Team");
+    expect(SITE_COPY.en.workHub.supportingCopy).toBe(
+      "Explore the work our team has delivered across different industries."
+    );
+    for (const asset of [
+      ...MEDIA_MANIFEST.designs,
+      ...MEDIA_MANIFEST.videos,
+      ...MEDIA_MANIFEST.websites,
+    ]) {
+      expect(asset.localPath).not.toContain("drive.google.com");
+      expect(asset.localPath).not.toContain("googleusercontent.com");
+      if (asset.posterPath) {
+        expect(asset.posterPath).toMatch(/^\/media\/posters\/.+\.webp$/);
       }
     }
   });

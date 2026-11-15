@@ -1,7 +1,17 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { Locale, WorkFolderItem } from "@/data/types";
-import { getCopy, WORK_FOLDERS } from "@/data/content";
+import {
+  DESIGN_CLIENTS,
+  getCopy,
+  TOTAL_DESIGN_COUNT,
+  TOTAL_VIDEO_COUNT,
+  VIDEO_INDUSTRY_GROUPS,
+  WORK_FOLDERS,
+} from "@/data/content";
 
 export function WorkFolders({
   lang,
@@ -11,9 +21,32 @@ export function WorkFolders({
   mode?: "home" | "hub";
 }) {
   const copy = getCopy(lang);
-  const designsFolder = WORK_FOLDERS.find((f) => f.id === "designs")!;
-  const videosFolder = WORK_FOLDERS.find((f) => f.id === "videos")!;
+  const prefersReducedMotion = useReducedMotion();
+  const easeOutExpo: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+  // Dynamically compute count labels from the actual collection arrays
+  const designCaseCount = String(DESIGN_CLIENTS.length).padStart(2, "0");
+  const videoGroupCount = String(VIDEO_INDUSTRY_GROUPS.length).padStart(2, "0");
+
+  const baseDesigns = WORK_FOLDERS.find((f) => f.id === "designs")!;
+  const baseVideos = WORK_FOLDERS.find((f) => f.id === "videos")!;
   const websitesFolder = WORK_FOLDERS.find((f) => f.id === "websites")!;
+
+  const designsFolder: WorkFolderItem = {
+    ...baseDesigns,
+    countLabel: {
+      en: `${designCaseCount} Case Studies · ${TOTAL_DESIGN_COUNT} Visuals`,
+      ar: `${designCaseCount} دراسات حالة · ${TOTAL_DESIGN_COUNT} تصميمًا`,
+    },
+  };
+
+  const videosFolder: WorkFolderItem = {
+    ...baseVideos,
+    countLabel: {
+      en: `${videoGroupCount} Industries · ${TOTAL_VIDEO_COUNT} Films`,
+      ar: `${videoGroupCount} قطاعات · ${TOTAL_VIDEO_COUNT} فيديو`,
+    },
+  };
 
   return (
     <section
@@ -28,7 +61,13 @@ export function WorkFolders({
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Heading: Client Work + Our Team */}
-        <div className="mx-auto max-w-3xl text-center mb-16 sm:mb-24">
+        <motion.div
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6, ease: easeOutExpo }}
+          className="mx-auto max-w-3xl text-center mb-16 sm:mb-24"
+        >
           <div className="inline-flex flex-wrap items-center justify-center gap-2.5 mb-4">
             <span
               data-testid="work-secondary-label"
@@ -47,13 +86,14 @@ export function WorkFolders({
           </div>
 
           <h1
+            data-testid={mode === "hub" ? "work-hub-heading" : "work-preview-heading"}
             className={`font-bold text-alabaster mb-4 ${
-              lang === "ar"
+              lang === "ar" && mode === "home"
                 ? "font-arabic text-3xl sm:text-5xl lg:text-6xl leading-[1.2]"
                 : "font-display text-3xl sm:text-5xl lg:text-6xl leading-[1.08] tracking-tight"
             }`}
           >
-            {copy.workPreview.heading}
+            {mode === "hub" ? copy.workHub.heading : copy.workPreview.heading}
           </h1>
 
           {mode === "hub" && (
@@ -64,7 +104,7 @@ export function WorkFolders({
               {copy.workHub.supportingCopy}
             </p>
           )}
-        </div>
+        </motion.div>
 
         {/*
           Triangle Folder Geometry (Section 3.4 & Section 5):
@@ -110,8 +150,14 @@ export function WorkFolders({
 
           {/* Upper Row: Upper Left (Designs) & Upper Right (Videos) */}
           <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8 items-start">
-            <div
+            <motion.div
               data-testid="folder-slot-top-left"
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 26 }}
+              whileInView={
+                prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+              }
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.6, ease: easeOutExpo }}
               className="md:col-span-5 md:col-start-1"
             >
               <FolderInteractiveCard
@@ -121,10 +167,16 @@ export function WorkFolders({
                 indexNumber="01"
                 openLabel={copy.workPreview.openFolderLabel}
               />
-            </div>
+            </motion.div>
 
-            <div
+            <motion.div
               data-testid="folder-slot-top-right"
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 26 }}
+              whileInView={
+                prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+              }
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
               className="md:col-span-5 md:col-start-8"
             >
               <FolderInteractiveCard
@@ -134,13 +186,19 @@ export function WorkFolders({
                 indexNumber="02"
                 openLabel={copy.workPreview.openFolderLabel}
               />
-            </div>
+            </motion.div>
           </div>
 
           {/* Lower Center Row: Websites positioned between the upper two */}
           <div className="mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-12">
-            <div
+            <motion.div
               data-testid="folder-slot-bottom-center"
+              initial={prefersReducedMotion ? false : { opacity: 0, y: 26 }}
+              whileInView={
+                prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+              }
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: 0.18, ease: easeOutExpo }}
               className="md:col-span-6 md:col-start-4"
             >
               <FolderInteractiveCard
@@ -150,22 +208,39 @@ export function WorkFolders({
                 indexNumber="03"
                 openLabel={copy.workPreview.openFolderLabel}
               />
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* Homepage CTA: View all work */}
         {mode === "home" && (
-          <div className="mt-16 sm:mt-24 text-center">
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 18 }}
+            whileInView={
+              prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
+            }
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.55, delay: 0.22, ease: easeOutExpo }}
+            className="mt-16 sm:mt-24 text-center"
+          >
             <Link
               href={`/${lang}/work`}
               data-testid="work-preview-view-all"
-              className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/[0.04] px-8 py-4 text-sm sm:text-base font-bold text-alabaster transition-all duration-200 hover:border-transparent hover:bg-brand-gradient hover:shadow-brandGlow hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brandBlue"
+              className="group inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/[0.04] px-8 py-4 text-sm sm:text-base font-bold text-alabaster transition-all duration-300 hover:border-transparent hover:bg-brand-gradient hover:shadow-brandGlow hover:-translate-y-0.5 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-brandBlue"
             >
               <span>{copy.workPreview.cta}</span>
-              <span aria-hidden="true">{lang === "ar" ? "←" : "→"}</span>
+              <span
+                aria-hidden="true"
+                className={`inline-block transition-transform duration-300 ${
+                  lang === "ar"
+                    ? "group-hover:-translate-x-1"
+                    : "group-hover:translate-x-1"
+                }`}
+              >
+                {lang === "ar" ? "←" : "→"}
+              </span>
             </Link>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>
@@ -215,7 +290,7 @@ function FolderInteractiveCard({
         />
 
         {/* Front Folder Pocket Body */}
-        <div className="relative z-10 overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-b from-[#1B1B22] to-[#121216] p-7 sm:p-8 shadow-folder transition-all duration-300 group-hover:border-brandPurple/60">
+        <div className="relative z-10 overflow-hidden rounded-3xl border border-white/12 bg-gradient-to-b from-[#1B1B22] to-[#121216] p-7 sm:p-8 shadow-folder transition-all duration-300 group-hover:border-brandPurple/60 group-hover:shadow-[0_24px_60px_rgba(129,69,202,0.22)]">
           {/* Subtle top pocket crease */}
           <div
             aria-hidden="true"
@@ -252,7 +327,7 @@ function FolderInteractiveCard({
               {folder.title[lang]}
             </h3>
 
-            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-sm text-alabaster transition-all duration-300 group-hover:border-transparent group-hover:bg-brand-gradient group-hover:text-alabaster">
+            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-sm text-alabaster transition-all duration-300 group-hover:border-transparent group-hover:bg-brand-gradient group-hover:text-alabaster group-hover:scale-110">
               {lang === "ar" ? "←" : "↗"}
             </span>
           </div>
@@ -268,7 +343,14 @@ function FolderInteractiveCard({
 
           <div className="mt-5 pt-3 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-gradient">
             <span>{openLabel}</span>
-            <span aria-hidden="true" className="text-brandOrange">
+            <span
+              aria-hidden="true"
+              className={`inline-block text-brandOrange transition-transform duration-300 ${
+                lang === "ar"
+                  ? "group-hover:-translate-x-1"
+                  : "group-hover:translate-x-1"
+              }`}
+            >
               {lang === "ar" ? "←" : "→"}
             </span>
           </div>

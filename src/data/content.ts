@@ -1,6 +1,7 @@
 import {
   ContactPhoneNumber,
   DesignClientCaseStudy,
+  DesignShowcaseBox,
   Locale,
   ServiceItem,
   VideoIndustryGroup,
@@ -24,8 +25,8 @@ export const BUSINESS_CONFIG = {
   brandName: "Helal Media Production",
   shortBrandName: "Helal Media",
   officialSlogan: {
-    en: "Marketing Has No Catalog",
-    ar: "التسويق ليس له كتالوج",
+    en: "التسويق ملوش كتالوج",
+    ar: "التسويق ملوش كتالوج",
   },
   email: "helal.media0@gmail.com",
   phones: [
@@ -62,10 +63,10 @@ export const BUSINESS_CONFIG = {
     facebookLabel: "Helal Media on Facebook",
   },
   /**
-   * WhatsApp-enabled phone number is not identified among the three numbers.
-   * Only activates if explicitly configured via NEXT_PUBLIC_WHATSAPP_URL.
+   * Primary WhatsApp business contact URL (reuses configured primary WhatsApp number +201055515576).
    */
-  whatsappUrl: process.env.NEXT_PUBLIC_WHATSAPP_URL || "",
+  whatsappUrl:
+    process.env.NEXT_PUBLIC_WHATSAPP_URL || "https://wa.me/201055515576",
   availability: {
     en: "Open by appointment",
     ar: "نستقبلكم بمواعيد مسبقة",
@@ -262,8 +263,8 @@ export const WORK_FOLDERS: WorkFolderItem[] = [
     },
     href: "/work/videos",
     countLabel: {
-      en: "05 Industries · 21 Films",
-      ar: "05 قطاعات · 21 فيديو",
+      en: "05 Industries · 23 Films",
+      ar: "05 قطاعات · 23 فيديو",
     },
   },
   {
@@ -496,7 +497,103 @@ export const DESIGN_CLIENTS: DesignClientCaseStudy[] = [
 ];
 
 /**
- * Section 7: Videos Case-Study Collection (5 Industry Groups, 21 Videos)
+ * Interactive Design Showcase Boxes (5 Curated Motion Galleries, 34 Design Assets)
+ * Modeled on https://naeladvertising.ae/web-design/ per Google Doc Item 12.
+ */
+export const DESIGN_SHOWCASE_BOXES: DesignShowcaseBox[] = [
+  {
+    id: "showcase-box-1-team",
+    slug: "by-our-team",
+    eyebrow: "BY OUR TEAM",
+    title: "BY OUR TEAM",
+    subtitle:
+      "From social media designs to full brand identities, explore the work of our team.",
+    variant: "arc-3d",
+    assetIds: [
+      "design-showcase-1-1",
+      "design-showcase-1-2",
+      "design-showcase-1-3",
+      "design-showcase-1-4",
+      "design-showcase-1-5",
+      "design-showcase-1-6",
+      "design-showcase-1-7",
+      "design-showcase-1-8",
+    ],
+  },
+  {
+    id: "showcase-box-2-beauty-health",
+    slug: "beauty-perfume-dental-health",
+    eyebrow: "02 / HEALTH & BEAUTY",
+    title:
+      "Beauty, perfume, dental, and health: see how our team brings each brand to life.",
+    variant: "expand-strip",
+    assetIds: [
+      "design-showcase-2-1",
+      "design-showcase-2-2",
+      "design-showcase-2-3",
+      "design-showcase-2-4",
+      "design-showcase-2-5",
+      "design-showcase-2-6",
+      "design-showcase-2-7",
+      "design-showcase-2-8",
+    ],
+  },
+  {
+    id: "showcase-box-3-food-cafe",
+    slug: "restaurants-and-cafes",
+    eyebrow: "03 / RESTAURANTS & CAFES",
+    title:
+      "From restaurants to cafes, explore the designs our team made to make every dish stand out.",
+    variant: "fan-stack",
+    assetIds: [
+      "design-showcase-3-1",
+      "design-showcase-3-2",
+      "design-showcase-3-3",
+      "design-showcase-3-4",
+      "design-showcase-3-5",
+      "design-showcase-3-6",
+      "design-showcase-3-7",
+    ],
+  },
+  {
+    id: "showcase-box-4-fitness",
+    slug: "fitness-and-athletics",
+    eyebrow: "04 / FITNESS",
+    title:
+      "Motivation starts with the first look. See how our team designs for fitness.",
+    variant: "focus-carousel",
+    assetIds: [
+      "design-showcase-4-1",
+      "design-showcase-4-2",
+      "design-showcase-4-3",
+      "design-showcase-4-4",
+      "design-showcase-4-5",
+      "design-showcase-4-6",
+    ],
+  },
+  {
+    id: "showcase-box-5-academies",
+    slug: "academies-and-education",
+    eyebrow: "05 / ACADEMIES",
+    title: "Designs that inspire learning and earn trust for every academy.",
+    variant: "film-strip",
+    assetIds: [
+      "design-showcase-5-1",
+      "design-showcase-5-2",
+      "design-showcase-5-3",
+      "design-showcase-5-4",
+      "design-showcase-5-5",
+    ],
+  },
+];
+
+export const TOTAL_SHOWCASE_DESIGN_COUNT = DESIGN_SHOWCASE_BOXES.reduce(
+  (sum, box) => sum + box.assetIds.length,
+  0
+);
+
+/**
+ * Section 7: Videos Case-Study Collection (5 Industry Groups, 23 Videos)
  */
 export const VIDEO_INDUSTRY_GROUPS: VideoIndustryGroup[] = [
   {
@@ -518,6 +615,8 @@ export const VIDEO_INDUSTRY_GROUPS: VideoIndustryGroup[] = [
       "video-health-care-5",
       "video-health-care-6",
       "video-health-care-7",
+      "video-health-care-8",
+      "video-health-care-9",
     ],
   },
   {
@@ -578,16 +677,25 @@ export const VIDEO_INDUSTRY_GROUPS: VideoIndustryGroup[] = [
     id: "video-group-5-ai-characters",
     slug: "ai-characters",
     title: {
-      en: "AI Characters",
-      ar: "شخصيات الذكاء الاصطناعي",
+      en: "AI Content Production",
+      ar: "إنتاج المحتوى بالذكاء الاصطناعي",
     },
     editorialNote: {
-      en: "Next-generation character-driven creative blending AI synthesis with narrative direction.",
-      ar: "محتوى إبداعي مبتكر يدمج شخصيات الذكاء الاصطناعي مع الإخراج القصصي لخلق تجربة بصرية فريدة.",
+      en: "AI-assisted content creation, video production, and creative storytelling blending generative visuals with narrative direction.",
+      ar: "صناعة محتوى وإنتاج مرئي بالذكاء الاصطناعي يجمع بين الإبداع البصري والإخراج القصصي المؤثر.",
     },
     assetIds: ["video-ai-characters-1", "video-ai-characters-2"],
   },
 ];
+
+export const TOTAL_VIDEO_COUNT = VIDEO_INDUSTRY_GROUPS.reduce(
+  (sum, group) => sum + group.assetIds.length,
+  0
+);
+export const TOTAL_DESIGN_COUNT = DESIGN_CLIENTS.reduce(
+  (sum, client) => sum + client.assetIds.length,
+  0
+);
 
 /**
  * Section 8: Websites Case-Study Collection (5 Website Projects, 24 Screenshots from Google Drive folder 1_aqFp9GmWLrcXfVObZJiqVOwV1m41Id5)
@@ -729,7 +837,7 @@ export const SITE_COPY = {
     },
     intro: {
       brand: "Helal Media Production",
-      slogan: "Marketing Has No Catalog",
+      slogan: "التسويق ملوش كتالوج",
       skip: "Skip Intro",
     },
     nav: {
@@ -738,10 +846,19 @@ export const SITE_COPY = {
       work: "Work",
       services: "Services",
       contact: "Contact",
+      contactUsCta: "Contact Us",
+      contactUsAria: "Navigate to Contact Us page",
+      soundOn: "Sound On",
+      soundOff: "Sound Off",
+      soundToggleAria: "Toggle interactive UI sound effects",
       langSwitchLabel: "العربية",
       langSwitchAria: "Switch language to Arabic",
       openMenu: "Open navigation menu",
       closeMenu: "Close navigation menu",
+    },
+    floatingWhatsapp: {
+      tooltip: "Chat with us",
+      ariaLabel: "Chat with Helal Media on WhatsApp",
     },
     hero: {
       eyebrow: "Full-Service Marketing Agency",
@@ -793,10 +910,11 @@ export const SITE_COPY = {
       ctaButton: "Start a project",
     },
     workHub: {
-      heading: "Client Work",
+      heading: "Work by Our Team",
       secondaryLabel: "Our Team",
       categoryBadge: "Graphic Design",
-      supportingCopy: "Discover how we’ve helped brands stand out and succeed.",
+      supportingCopy:
+        "Explore the work our team has delivered across different industries.",
       backToWork: "Back to Work",
     },
     designsPage: {
@@ -826,6 +944,7 @@ export const SITE_COPY = {
       muteVideo: "Mute audio",
       unmuteVideo: "Unmute audio",
       fullscreenVideo: "Fullscreen",
+      resetVideo: "Show thumbnail",
       unavailableVideo: "Video stream unavailable",
     },
     websitesPage: {
@@ -894,7 +1013,7 @@ export const SITE_COPY = {
       },
     },
     footer: {
-      tagline: "Marketing has no catalog — a full-service marketing agency",
+      tagline: "التسويق ملوش كتالوج",
       navigateHeading: "NAVIGATE",
       getInTouchHeading: "GET IN TOUCH",
       followUs: "Follow us",
@@ -912,7 +1031,7 @@ export const SITE_COPY = {
   },
   ar: {
     meta: {
-      siteTitle: "Helal Media Production — التسويق ليس له كتالوج",
+      siteTitle: "Helal Media Production — التسويق ملوش كتالوج",
       siteDescription:
         "وكالة تسويق متكاملة الخدمات. نتعرف على علامتك التجارية وجمهورك وما يحفّزه، ثم نحوّل هذا الفهم إلى أفكار تلفت الانتباه، وتبني الثقة، وتدفع الجمهور إلى التفاعل واتخاذ القرار.",
       pages: {
@@ -927,7 +1046,7 @@ export const SITE_COPY = {
     },
     intro: {
       brand: "Helal Media Production",
-      slogan: "التسويق ليس له كتالوج",
+      slogan: "التسويق ملوش كتالوج",
       skip: "تخطي المقدمة",
     },
     nav: {
@@ -936,10 +1055,19 @@ export const SITE_COPY = {
       work: "أعمالنا",
       services: "خدماتنا",
       contact: "تواصل معنا",
+      contactUsCta: "تواصل معنا",
+      contactUsAria: "الانتقال إلى صفحة تواصل معنا",
+      soundOn: "الصوت مفعل",
+      soundOff: "الصوت مكتوم",
+      soundToggleAria: "تشغيل أو كتم المؤثرات الصوتية التفاعلية",
       langSwitchLabel: "EN",
       langSwitchAria: "التبديل إلى اللغة الإنجليزية",
       openMenu: "فتح قائمة التصفح",
       closeMenu: "إغلاق قائمة التصفح",
+    },
+    floatingWhatsapp: {
+      tooltip: "تواصل معنا",
+      ariaLabel: "تواصل مع هلال ميديا عبر واتساب",
     },
     hero: {
       eyebrow: "وكالة تسويق متكاملة الخدمات",
@@ -990,10 +1118,11 @@ export const SITE_COPY = {
       ctaButton: "ابدأ مشروعك",
     },
     workHub: {
-      heading: "أعمال عملائنا",
+      heading: "Work by Our Team",
       secondaryLabel: "فريقنا",
       categoryBadge: "التصميم الجرافيكي",
-      supportingCopy: "اكتشف كيف ساعدنا العلامات التجارية على التميز والنجاح.",
+      supportingCopy:
+        "Explore the work our team has delivered across different industries.",
       backToWork: "العودة إلى أعمالنا",
     },
     designsPage: {
@@ -1017,13 +1146,14 @@ export const SITE_COPY = {
       supportingCopy: "ريلز وأفلام للعلامات التجارية تحكي قصة كل عميل.",
       overviewLabel: "نظرة عامة",
       overviewCopy:
-        "فيديوهات للعلامات التجارية في قطاعات مختلفة، من الرعاية الصحية والشحن إلى الرياضة والديكور والشخصيات المصممة بالذكاء الاصطناعي؛ يروي كل فيديو قصة ويجذب الانتباه.",
+        "فيديوهات للعلامات التجارية في قطاعات مختلفة، من الرعاية الصحية والشحن إلى الرياضة والديكور وإنتاج المحتوى بالذكاء الاصطناعي؛ يروي كل فيديو قصة ويجذب الانتباه.",
       inThisCollection: "ضمن هذه المجموعة",
       playVideo: "تشغيل الفيديو",
       pauseVideo: "إيقاف مؤقت",
       muteVideo: "كتم الصوت",
       unmuteVideo: "تشغيل الصوت",
       fullscreenVideo: "ملء الشاشة",
+      resetVideo: "عرض الصورة المصغرة",
       unavailableVideo: "ملف الفيديو غير متاح حاليًا",
     },
     websitesPage: {
@@ -1042,7 +1172,7 @@ export const SITE_COPY = {
       visitSite: "زيارة الموقع",
     },
     contactPage: {
-      heroPrefix: "التسويق ليس له ",
+      heroPrefix: "التسويق ملوش ",
       heroAccent: "كتالوج",
       heroSuffix: ". سنكتب لعلامتك التجارية",
       supportingCopy:
@@ -1083,7 +1213,7 @@ export const SITE_COPY = {
       },
     },
     footer: {
-      tagline: "التسويق ليس له كتالوج — وكالة تسويق متكاملة الخدمات",
+      tagline: "التسويق ملوش كتالوج",
       navigateHeading: "تصفح الموقع",
       getInTouchHeading: "تواصل معنا",
       followUs: "تابعنا",

@@ -72,6 +72,16 @@ export interface DesignClientCaseStudy {
   assetIds: string[];
 }
 
+export interface DesignShowcaseBox {
+  id: string;
+  slug: string;
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  variant: "arc-3d" | "expand-strip" | "fan-stack" | "focus-carousel" | "film-strip";
+  assetIds: string[];
+}
+
 export interface VideoIndustryGroup {
   id: string;
   slug: "health-care" | "shipping" | "sports" | "home-decor" | "ai-characters";

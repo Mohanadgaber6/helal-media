@@ -37,35 +37,76 @@ const DESIGN_ITEMS = [
   { id: "design-yadawy-3", kind: "image", groupSlug: "yadawy", clientName: "Yadawy", industry: "Home Decor", credit: "Designed By / Ahmed Maroof", index: 3, isLead: false, sourceUrl: "https://drive.google.com/file/d/1ehB37dYdu53NI4fBIC9m83q19DCHumFa/view?usp=drive_link" },
   { id: "design-yadawy-4", kind: "image", groupSlug: "yadawy", clientName: "Yadawy", industry: "Home Decor", credit: "Designed By / Ahmed Maroof", index: 4, isLead: false, sourceUrl: "https://drive.google.com/file/d/1QTTj_7XqhPMJrqY7s1MY9-KvOMrqWjNB/view?usp=drive_link" },
   { id: "design-yadawy-5", kind: "image", groupSlug: "yadawy", clientName: "Yadawy", industry: "Home Decor", credit: "Designed By / Ahmed Maroof", index: 5, isLead: false, sourceUrl: "https://drive.google.com/file/d/1WwQmBSCw0HIZsrPza_hLDul10F40ZdBZ/view?usp=drive_link" },
+  // Showcase Box 1: By Our Team (8)
+  { id: "design-showcase-1-1", kind: "image", groupSlug: "showcase-team", clientName: "By Our Team", industry: "Social & Brand Identity", index: 1, isLead: true, sourceUrl: "https://drive.google.com/file/d/1S5YykVj_9tB9aN1TnTigJ7zX1hOHtIDa/view?usp=drive_link" },
+  { id: "design-showcase-1-2", kind: "image", groupSlug: "showcase-team", clientName: "By Our Team", industry: "Social & Brand Identity", index: 2, isLead: false, sourceUrl: "https://drive.google.com/file/d/18TgZTvC1nuDxUpO03HIREmJIpWTP7Hf9/view?usp=drive_link" },
+  { id: "design-showcase-1-3", kind: "image", groupSlug: "showcase-team", clientName: "By Our Team", industry: "Social & Brand Identity", index: 3, isLead: false, sourceUrl: "https://drive.google.com/file/d/1SK1NoYQ9ATx-NiMoFmdl2iFg2dKb7yVu/view?usp=drive_link" },
+  { id: "design-showcase-1-4", kind: "image", groupSlug: "showcase-team", clientName: "By Our Team", industry: "Social & Brand Identity", index: 4, isLead: false, sourceUrl: "https://drive.google.com/file/d/1LYQ_9cL5xNqDuvDTNmdV2mJmugxCTXW8/view?usp=drive_link" },
+  { id: "design-showcase-1-5", kind: "image", groupSlug: "showcase-team", clientName: "By Our Team", industry: "Social & Brand Identity", index: 5, isLead: false, sourceUrl: "https://drive.google.com/file/d/1u9UXEXwDl5cdTUa_vy5t_98YmQe2sxo5/view?usp=drive_link" },
+  { id: "design-showcase-1-6", kind: "image", groupSlug: "showcase-team", clientName: "By Our Team", industry: "Social & Brand Identity", index: 6, isLead: false, sourceUrl: "https://drive.google.com/file/d/1u2S_MB4KYdc2YO3HCQ1_vjVQY4bPFnnJ/view?usp=drive_link" },
+  { id: "design-showcase-1-7", kind: "image", groupSlug: "showcase-team", clientName: "By Our Team", industry: "Social & Brand Identity", index: 7, isLead: false, sourceUrl: "https://drive.google.com/file/d/1gk7WlwV-englUjspY1f-DCA9jOJId8F_/view?usp=drive_link" },
+  { id: "design-showcase-1-8", kind: "image", groupSlug: "showcase-team", clientName: "By Our Team", industry: "Social & Brand Identity", index: 8, isLead: false, sourceUrl: "https://drive.google.com/file/d/1Vv_PL17AZuemfQmtdNMQScjdEgMJ9VsT/view?usp=drive_link" },
+  // Showcase Box 2: Beauty, Perfume, Dental & Health (8)
+  { id: "design-showcase-2-1", kind: "image", groupSlug: "showcase-beauty-health", clientName: "Beauty & Health", industry: "Health & Beauty", index: 1, isLead: true, sourceUrl: "https://drive.google.com/file/d/1MFGRRuOv390wtppSMyCDTpnyUWroGITK/view?usp=drive_link" },
+  { id: "design-showcase-2-2", kind: "image", groupSlug: "showcase-beauty-health", clientName: "Beauty & Health", industry: "Health & Beauty", index: 2, isLead: false, sourceUrl: "https://drive.google.com/file/d/1Py24BSGIAGfrQFqRDnFEcGQJrFHd-Ah6/view?usp=drive_link" },
+  { id: "design-showcase-2-3", kind: "image", groupSlug: "showcase-beauty-health", clientName: "Beauty & Health", industry: "Health & Beauty", index: 3, isLead: false, sourceUrl: "https://drive.google.com/file/d/1aTiZazhTqBDxXfphdM8E2vhd_pzu9aMb/view?usp=drive_link" },
+  { id: "design-showcase-2-4", kind: "image", groupSlug: "showcase-beauty-health", clientName: "Beauty & Health", industry: "Health & Beauty", index: 4, isLead: false, sourceUrl: "https://drive.google.com/file/d/1dKhgCqDDS9Pr5GsaqOegOzkSwWySdl5u/view?usp=drive_link" },
+  { id: "design-showcase-2-5", kind: "image", groupSlug: "showcase-beauty-health", clientName: "Beauty & Health", industry: "Health & Beauty", index: 5, isLead: false, sourceUrl: "https://drive.google.com/file/d/1XVsPwtTZV4n07XOD53TO59_Y6vQzRrFj/view?usp=drive_link" },
+  { id: "design-showcase-2-6", kind: "image", groupSlug: "showcase-beauty-health", clientName: "Beauty & Health", industry: "Health & Beauty", index: 6, isLead: false, sourceUrl: "https://drive.google.com/file/d/1B3jM7SWX6-51-jiWcIAaYgrGcD1hGWw2/view?usp=drive_link" },
+  { id: "design-showcase-2-7", kind: "image", groupSlug: "showcase-beauty-health", clientName: "Beauty & Health", industry: "Health & Beauty", index: 7, isLead: false, sourceUrl: "https://drive.google.com/file/d/1xdzWR9bE1_YJGMGJ5skbu3VV5Oe3ENlf/view?usp=drive_link" },
+  { id: "design-showcase-2-8", kind: "image", groupSlug: "showcase-beauty-health", clientName: "Beauty & Health", industry: "Health & Beauty", index: 8, isLead: false, sourceUrl: "https://drive.google.com/file/d/1pXGa0gZDobljC9HKnoscd_iYEP0AAlV2/view?usp=drive_link" },
+  // Showcase Box 3: Restaurants & Cafes (7)
+  { id: "design-showcase-3-1", kind: "image", groupSlug: "showcase-food-cafe", clientName: "Restaurants & Cafes", industry: "Food & Beverage", index: 1, isLead: true, sourceUrl: "https://drive.google.com/file/d/16wFIZg3P65lZN_gMZWMsJoWeAZXyI4YT/view?usp=drive_link" },
+  { id: "design-showcase-3-2", kind: "image", groupSlug: "showcase-food-cafe", clientName: "Restaurants & Cafes", industry: "Food & Beverage", index: 2, isLead: false, sourceUrl: "https://drive.google.com/file/d/1zBGhnJXfuJC2LRdhd9lQO7-gwSjgCyex/view?usp=drive_link" },
+  { id: "design-showcase-3-3", kind: "image", groupSlug: "showcase-food-cafe", clientName: "Restaurants & Cafes", industry: "Food & Beverage", index: 3, isLead: false, sourceUrl: "https://drive.google.com/file/d/1g-0Y6fn7HGOIFl2jSETpoRKTwtizylH5/view?usp=drive_link" },
+  { id: "design-showcase-3-4", kind: "image", groupSlug: "showcase-food-cafe", clientName: "Restaurants & Cafes", industry: "Food & Beverage", index: 4, isLead: false, sourceUrl: "https://drive.google.com/file/d/12A-GJX8SvBZPCKh8_R-FH06FqKNl67EO/view?usp=drive_link" },
+  { id: "design-showcase-3-5", kind: "image", groupSlug: "showcase-food-cafe", clientName: "Restaurants & Cafes", industry: "Food & Beverage", index: 5, isLead: false, sourceUrl: "https://drive.google.com/file/d/1i6UAMwstsIejN27C5BUX7hMWxz60zA98/view?usp=drive_link" },
+  { id: "design-showcase-3-6", kind: "image", groupSlug: "showcase-food-cafe", clientName: "Restaurants & Cafes", industry: "Food & Beverage", index: 6, isLead: false, sourceUrl: "https://drive.google.com/file/d/16X8qOxc76knDyAdspvfEH2DuwKYX5m1a/view?usp=drive_link" },
+  { id: "design-showcase-3-7", kind: "image", groupSlug: "showcase-food-cafe", clientName: "Restaurants & Cafes", industry: "Food & Beverage", index: 7, isLead: false, sourceUrl: "https://drive.google.com/file/d/1WSFRUjfQ2hxIaykeDMaeBlq2TX5aVdiM/view?usp=drive_link" },
+  // Showcase Box 4: Fitness (6)
+  { id: "design-showcase-4-1", kind: "image", groupSlug: "showcase-fitness", clientName: "Fitness & Athletics", industry: "Sports & Fitness", index: 1, isLead: true, sourceUrl: "https://drive.google.com/file/d/1Yb0QV7L0J5o_jyHUEHWZnPqMNGfXPTf5/view?usp=drive_link" },
+  { id: "design-showcase-4-2", kind: "image", groupSlug: "showcase-fitness", clientName: "Fitness & Athletics", industry: "Sports & Fitness", index: 2, isLead: false, sourceUrl: "https://drive.google.com/file/d/1dTfzyAsBc0bmip53pyzTWVLe-C0JId6n/view?usp=drive_link" },
+  { id: "design-showcase-4-3", kind: "image", groupSlug: "showcase-fitness", clientName: "Fitness & Athletics", industry: "Sports & Fitness", index: 3, isLead: false, sourceUrl: "https://drive.google.com/file/d/1gUH1J4rdDsPmGXwCLTLy8vmT8aeX2z2G/view?usp=drive_link" },
+  { id: "design-showcase-4-4", kind: "image", groupSlug: "showcase-fitness", clientName: "Fitness & Athletics", industry: "Sports & Fitness", index: 4, isLead: false, sourceUrl: "https://drive.google.com/file/d/19RaxMR628FjL7w6MhwQAZ9kg-PNv49P5/view?usp=drive_link" },
+  { id: "design-showcase-4-5", kind: "image", groupSlug: "showcase-fitness", clientName: "Fitness & Athletics", industry: "Sports & Fitness", index: 5, isLead: false, sourceUrl: "https://drive.google.com/file/d/1lKxOD3cvpwMxmHH1fUllSYmNuSVpiI8t/view?usp=drive_link" },
+  { id: "design-showcase-4-6", kind: "image", groupSlug: "showcase-fitness", clientName: "Fitness & Athletics", industry: "Sports & Fitness", index: 6, isLead: false, sourceUrl: "https://drive.google.com/file/d/1uiKJevYcADB0lUfdj0XLbdklj-_x0jH_/view?usp=drive_link" },
+  // Showcase Box 5: Academies (5)
+  { id: "design-showcase-5-1", kind: "image", groupSlug: "showcase-academies", clientName: "Academies & Education", industry: "Education", index: 1, isLead: true, sourceUrl: "https://drive.google.com/file/d/1m127qbTERKGIe4R92LC8FMzDHBegtofW/view?usp=drive_link" },
+  { id: "design-showcase-5-2", kind: "image", groupSlug: "showcase-academies", clientName: "Academies & Education", industry: "Education", index: 2, isLead: false, sourceUrl: "https://drive.google.com/file/d/19jwILn40B51BAmSH7OaAyt0vZHBXE2s6/view?usp=drive_link" },
+  { id: "design-showcase-5-3", kind: "image", groupSlug: "showcase-academies", clientName: "Academies & Education", industry: "Education", index: 3, isLead: false, sourceUrl: "https://drive.google.com/file/d/1xFzerxx9zvtc14IKLBM760jpzza8IsbY/view?usp=drive_link" },
+  { id: "design-showcase-5-4", kind: "image", groupSlug: "showcase-academies", clientName: "Academies & Education", industry: "Education", index: 4, isLead: false, sourceUrl: "https://drive.google.com/file/d/172Twae6Q_xnaG0dBWg-FCUYrq_sByLyu/view?usp=drive_link" },
+  { id: "design-showcase-5-5", kind: "image", groupSlug: "showcase-academies", clientName: "Academies & Education", industry: "Education", index: 5, isLead: false, sourceUrl: "https://drive.google.com/file/d/1wmEQ_DivvTjMgmchJ-2jgo_jRtE81v2z/view?usp=drive_link" },
 ];
 
 const VIDEO_ITEMS = [
-  // Group 1: Health Care (7)
-  { id: "video-health-care-1", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 1, sourceUrl: "https://drive.google.com/file/d/17SV0E9JO4LVoDaoGjTs5nLGL0tON_a-e/view?usp=drive_link" },
-  { id: "video-health-care-2", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 2, sourceUrl: "https://drive.google.com/file/d/1Pd6N5ABBFnFUxuH6__vgAwdmSLR7ez12/view?usp=drive_link" },
-  { id: "video-health-care-3", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 3, sourceUrl: "https://drive.google.com/file/d/1j8cGcQg0zT9g0agWcN7V4gQXpS4_KC26/view?usp=drive_link" },
-  { id: "video-health-care-4", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 4, sourceUrl: "https://drive.google.com/file/d/1h3aUD9TvP-YbkTzf76U8TPJn0zKYcGHx/view?usp=drive_link" },
-  { id: "video-health-care-5", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 5, sourceUrl: "https://drive.google.com/file/d/1xB4hpyqi-XdgkAXSgzb-ehr1wMG_lmMx/view?usp=drive_link" },
-  { id: "video-health-care-6", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 6, sourceUrl: "https://drive.google.com/file/d/1Bdv-mjIagc7zJ-IRs3aiaB8T2kOWPTlO/view?usp=drive_link" },
-  { id: "video-health-care-7", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 7, sourceUrl: "https://drive.google.com/file/d/1SWJ4ot--7suRr-OpfwEtTs2fwSyydmzj/view?usp=drive_link" },
+  // Group 1: Health Care (9)
+  { id: "video-health-care-1", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 1, sourceUrl: "https://drive.google.com/file/d/17SV0E9JO4LVoDaoGjTs5nLGL0tON_a-e/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1ZOpZQZlKJhn0D4Cq8Sh990apFKHnJ8Il/view?usp=drive_link" },
+  { id: "video-health-care-2", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 2, sourceUrl: "https://drive.google.com/file/d/1h3aUD9TvP-YbkTzf76U8TPJn0zKYcGHx/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1fz8lOruDYwiQbA-C0rvc7QdGcybjh54W/view?usp=drive_link" },
+  { id: "video-health-care-3", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 3, sourceUrl: "https://drive.google.com/file/d/1xB4hpyqi-XdgkAXSgzb-ehr1wMG_lmMx/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1VZCyW9jBGsGFzQpVzBOrTxVj1Rr_qzEq/view?usp=drive_link" },
+  { id: "video-health-care-4", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 4, sourceUrl: "https://drive.google.com/file/d/1Bdv-mjIagc7zJ-IRs3aiaB8T2kOWPTlO/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1VEp6XMCRlx0sGKf2jLrQlbSE8dsAcGEp/view?usp=drive_link" },
+  { id: "video-health-care-5", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 5, sourceUrl: "https://drive.google.com/file/d/1SWJ4ot--7suRr-OpfwEtTs2fwSyydmzj/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/11soTJZTXGtoHf9liU9JegI1zalGjvCo-/view?usp=drive_link" },
+  { id: "video-health-care-6", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 6, sourceUrl: "https://drive.google.com/file/d/1Pd6N5ABBFnFUxuH6__vgAwdmSLR7ez12/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/11nY3zcXUlSTwhtRiqLC62kzdfItIGC2s/view?usp=drive_link" },
+  { id: "video-health-care-7", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 7, sourceUrl: "https://drive.google.com/file/d/1w51Nk77tqLiE0ibWA7yFHSw3lEx9c2N2/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1rmuzng2EVSww09zIk1F74mtjfNWE6MaD/view?usp=drive_link" },
+  { id: "video-health-care-8", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 8, sourceUrl: "https://drive.google.com/file/d/1jT0T55CMY6PRtdRqF4EU7S0lbNR0yfwb/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1z-w0YCFhkaLsZ7TYLU7KRb20pRdMi39y/view?usp=drive_link" },
+  { id: "video-health-care-9", kind: "video", groupSlug: "health-care", industry: "Health Care", index: 9, sourceUrl: "https://drive.google.com/file/d/1nva8k10_tOk9l6Vz-mKLhXN1Z-QkAXqP/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1wPmNjRrFMfEfWVrDah2J5WLlXOdmY8fx/view?usp=drive_link" },
   // Group 2: Shipping (4)
-  { id: "video-shipping-1", kind: "video", groupSlug: "shipping", industry: "Shipping", index: 1, sourceUrl: "https://drive.google.com/file/d/1lu-82yaRQRX5MsflZPONwEPtIUsfYv0j/view?usp=drive_link" },
-  { id: "video-shipping-2", kind: "video", groupSlug: "shipping", industry: "Shipping", index: 2, sourceUrl: "https://drive.google.com/file/d/1pz_zZ6H0qUE16isMmB7Hc9wtlD35BzZp/view?usp=drive_link" },
-  { id: "video-shipping-3", kind: "video", groupSlug: "shipping", industry: "Shipping", index: 3, sourceUrl: "https://drive.google.com/file/d/103IK4_Ezr1GCMmy4rI0aSe4wT87OVaLP/view?usp=drive_link" },
-  { id: "video-shipping-4", kind: "video", groupSlug: "shipping", industry: "Shipping", index: 4, sourceUrl: "https://drive.google.com/file/d/1TkmfYnnSu21mpy-PYqKhKyEj1IQKhuHp/view?usp=drive_link" },
+  { id: "video-shipping-1", kind: "video", groupSlug: "shipping", industry: "Shipping", index: 1, sourceUrl: "https://drive.google.com/file/d/1PFh3KpiqZ1Zq_8cFElQqbxHJoPRX7TXv/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1xWdGvY98oW7tvYJHwI4ZrVGqSD6OdGJi/view?usp=drive_link" },
+  { id: "video-shipping-2", kind: "video", groupSlug: "shipping", industry: "Shipping", index: 2, sourceUrl: "https://drive.google.com/file/d/12AUanXKDChP0g9b1zpgcY4czlQAc8q64/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1jsjEVR07GePBnIGjvS1m-PKBRABoIGKc/view?usp=drive_link" },
+  { id: "video-shipping-3", kind: "video", groupSlug: "shipping", industry: "Shipping", index: 3, sourceUrl: "https://drive.google.com/file/d/1xfpKyDoCiHyWVbo9nxANajyLM7enIdeu/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1tu1h6KKAv7IqpprnmRqFRft1d-D9V4PG/view?usp=drive_link" },
+  { id: "video-shipping-4", kind: "video", groupSlug: "shipping", industry: "Shipping", index: 4, sourceUrl: "https://drive.google.com/file/d/1ma8hSazlr8uMr-uGAsv62ad_peF1dExY/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1wBmwryMyJrkJLR-mg8Xkdn2IFXXzyy5K/view?usp=drive_link" },
   // Group 3: Sports (4)
-  { id: "video-sports-1", kind: "video", groupSlug: "sports", industry: "Sports", index: 1, sourceUrl: "https://drive.google.com/file/d/1pttI5qM9ql_yzJojhf4aWfnntS_VnIz8/view?usp=drive_link" },
-  { id: "video-sports-2", kind: "video", groupSlug: "sports", industry: "Sports", index: 2, sourceUrl: "https://drive.google.com/file/d/1D7_jAou0D8EsxRXMFlk9kyyKCCxpe4tO/view?usp=drive_link" },
-  { id: "video-sports-3", kind: "video", groupSlug: "sports", industry: "Sports", index: 3, sourceUrl: "https://drive.google.com/file/d/1lQEUuaAIWmUGhHmgzqWrUHy2SHn0h0Er/view?usp=drive_link" },
-  { id: "video-sports-4", kind: "video", groupSlug: "sports", industry: "Sports", index: 4, sourceUrl: "https://drive.google.com/file/d/1IkhNiBAl9WMKVdyQfHBVGAandZdGTdjM/view?usp=drive_link" },
+  { id: "video-sports-1", kind: "video", groupSlug: "sports", industry: "Sports", index: 1, sourceUrl: "https://drive.google.com/file/d/1btg9r-8NYZSVueL3f3Bzs5wJ3OaTWFnA/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1ekzx3c2PV7JwkFPKY6JqzZsvHDOWYlsx/view?usp=drive_link" },
+  { id: "video-sports-2", kind: "video", groupSlug: "sports", industry: "Sports", index: 2, sourceUrl: "https://drive.google.com/file/d/1xV9ULljcVt4DuXSPG2pOGHX1Lwxzzj0h/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1RURMQhDTHYR-yu-bd6yNgJLDCS8rMMCc/view?usp=drive_link" },
+  { id: "video-sports-3", kind: "video", groupSlug: "sports", industry: "Sports", index: 3, sourceUrl: "https://drive.google.com/file/d/1Txl2S8N99bhvYqYhnU-f8b_PzW3K9963/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1EKCya8nxDc9yfv_vxya_oK12kSsLWXSR/view?usp=drive_link" },
+  { id: "video-sports-4", kind: "video", groupSlug: "sports", industry: "Sports", index: 4, sourceUrl: "https://drive.google.com/file/d/1ReoErkTHqlmfpoYdq-rlCVNaPdSYJnqo/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1b01px15vctAteY1C5ePk4Zf-2GdcnCtS/view?usp=drive_link" },
   // Group 4: Home Decor (4)
-  { id: "video-home-decor-1", kind: "video", groupSlug: "home-decor", industry: "Home Decor", index: 1, sourceUrl: "https://drive.google.com/file/d/1Mcz-U6SZyp-7yMcbxDeeOBRi_FREDa77/view?usp=drive_link" },
-  { id: "video-home-decor-2", kind: "video", groupSlug: "home-decor", industry: "Home Decor", index: 2, sourceUrl: "https://drive.google.com/file/d/14bxp0txQAYF8PFzvjATRyPId5eHQYfhR/view?usp=drive_link" },
-  { id: "video-home-decor-3", kind: "video", groupSlug: "home-decor", industry: "Home Decor", index: 3, sourceUrl: "https://drive.google.com/file/d/1VWSoqxLHFP-h68agTnFiS1qElyHuDaVs/view?usp=drive_link" },
-  { id: "video-home-decor-4", kind: "video", groupSlug: "home-decor", industry: "Home Decor", index: 4, sourceUrl: "https://drive.google.com/file/d/1tWrTbD-HxROR1zxf1oFpSq9x_5s-Sd56/view?usp=drive_link" },
-  // Group 5: AI Characters (2)
-  { id: "video-ai-characters-1", kind: "video", groupSlug: "ai-characters", industry: "AI Characters", index: 1, sourceUrl: "https://drive.google.com/file/d/1CG8brIZL4wPomreok69JYAt2e2eh1bkx/view?usp=drive_link" },
-  { id: "video-ai-characters-2", kind: "video", groupSlug: "ai-characters", industry: "AI Characters", index: 2, sourceUrl: "https://drive.google.com/file/d/1wv9346PvajWOwx0_EcTLdny4zwflZs27/view?usp=drive_link" },
+  { id: "video-home-decor-1", kind: "video", groupSlug: "home-decor", industry: "Home Decor", index: 1, sourceUrl: "https://drive.google.com/file/d/1Mcz-U6SZyp-7yMcbxDeeOBRi_FREDa77/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1kUDcPpdeIWt0zuVN9jNy1ors5kIDJfeY/view?usp=drive_link" },
+  { id: "video-home-decor-2", kind: "video", groupSlug: "home-decor", industry: "Home Decor", index: 2, sourceUrl: "https://drive.google.com/file/d/1mqV5eypJyj_Vh0QAKPkDoqow73W3rS3b/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1b6Qvo-mon7mkpQMFp9jPtLXOtNOikVqd/view?usp=drive_link" },
+  { id: "video-home-decor-3", kind: "video", groupSlug: "home-decor", industry: "Home Decor", index: 3, sourceUrl: "https://drive.google.com/file/d/1tWrTbD-HxROR1zxf1oFpSq9x_5s-Sd56/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1tWrTbD-HxROR1zxf1oFpSq9x_5s-Sd56/view?usp=drive_link" },
+  { id: "video-home-decor-4", kind: "video", groupSlug: "home-decor", industry: "Home Decor", index: 4, sourceUrl: "https://drive.google.com/file/d/1VWSoqxLHFP-h68agTnFiS1qElyHuDaVs/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/18-aivBgrz_I9L7MDAMSGkRQ9lZ6ha-H8/view?usp=drive_link" },
+  // Group 5: AI Content Production (2)
+  { id: "video-ai-characters-1", kind: "video", groupSlug: "ai-characters", industry: "AI Content Production", index: 1, sourceUrl: "https://drive.google.com/file/d/1CG8brIZL4wPomreok69JYAt2e2eh1bkx/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/12FAwcIm861zPU4aIPDE69nOoy7r3gaKe/view?usp=drive_link" },
+  { id: "video-ai-characters-2", kind: "video", groupSlug: "ai-characters", industry: "AI Content Production", index: 2, sourceUrl: "https://drive.google.com/file/d/1wv9346PvajWOwx0_EcTLdny4zwflZs27/view?usp=drive_link", thumbnailUrl: "https://drive.google.com/file/d/1HbzUedbGpHcn1DSjeCVJPvSKMjXDjKf9/view?usp=drive_link" },
 ];
 
 const WEBSITE_ITEMS = [
@@ -309,7 +350,7 @@ async function generateVideoPosterWebp(
   height
 ) {
   const thumbCachePath = path.join(RAW_CACHE_DIR, `${itemId}_${fileId}_thumb.jpg`);
-  // If poster already exists on disk in public/media/posters/ and raw thumb cache isn't present, preserve existing poster without hitting Google Drive
+  // If raw thumb cache exists, always regenerate posterAbs from it so updated thumbnails take effect
   if (
     fs.existsSync(posterAbs) &&
     fs.statSync(posterAbs).size > 1024 &&
@@ -591,9 +632,26 @@ async function main() {
       error: null,
     };
 
+    if (!fs.existsSync(rawPath) && fs.existsSync(RAW_CACHE_DIR)) {
+      const matchingCachedBin = fs
+        .readdirSync(RAW_CACHE_DIR)
+        .find((f) => f.endsWith(`_${fileId}.bin`));
+      if (matchingCachedBin) {
+        const oldCacheBin = path.join(RAW_CACHE_DIR, matchingCachedBin);
+        if (fs.statSync(oldCacheBin).size > 1024) {
+          fs.renameSync(oldCacheBin, rawPath);
+        }
+      }
+    }
+
     let videoSourcePath = [rawPath, portfolioVideoAbs, outAbs].find(
       (p) => fs.existsSync(p) && fs.statSync(p).size > 1024
     );
+
+    // Always prefer rawPath when rawPath exists so updated Drive IDs replace older public/ copies
+    if (fs.existsSync(rawPath) && fs.statSync(rawPath).size > 1024) {
+      videoSourcePath = rawPath;
+    }
 
     if (!videoSourcePath) {
       const dl = await attemptDriveDownload(fileId, rawPath);

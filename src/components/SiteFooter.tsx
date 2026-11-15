@@ -40,7 +40,11 @@ export function SiteFooter({ lang }: { lang: Locale }) {
             >
               <HelalLogo size="md" />
             </Link>
-            <p className="max-w-sm text-sm sm:text-base leading-relaxed text-pewter">
+            <p
+              dir="rtl"
+              data-testid="footer-tagline"
+              className="max-w-sm text-lg sm:text-xl font-extrabold font-arabic tracking-wide leading-relaxed text-brand-gradient"
+            >
               {copy.footer.tagline}
             </p>
           </div>

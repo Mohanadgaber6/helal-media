@@ -44,7 +44,7 @@ export function IntroOverlay({ lang }: { lang: Locale }) {
 
     setVisible(true);
 
-    const duration = prefersReducedMotion ? 500 : 1750;
+    const duration = prefersReducedMotion ? 500 : 2400;
     const timer = window.setTimeout(() => {
       dismiss();
     }, duration);
@@ -80,33 +80,32 @@ export function IntroOverlay({ lang }: { lang: Locale }) {
       />
 
       <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-        {/* Official Helal Media Production Vector Logo */}
-        <div className="animate-[fadeInUp_0.55s_ease-out_forwards]">
+        {/* Official Helal Media Production Vector Logo + Brand Text */}
+        <div className="animate-[fadeInUp_0.55s_ease-out_forwards] flex flex-col items-center">
           <HelalLogo size="xl" priority />
+          <p
+            dir="ltr"
+            data-testid="intro-brand-name"
+            className="mt-4 font-display text-lg sm:text-2xl font-bold tracking-[0.18em] uppercase text-alabaster"
+          >
+            Helal Media Production
+          </p>
         </div>
 
         {/* Multicolor Brand Gradient Divider Line */}
         <span
-          className="my-6 h-[2px] w-24 bg-brand-gradient rounded-full animate-[scaleIn_0.5s_0.15s_ease-out_both]"
+          className="my-5 h-[2px] w-24 bg-brand-gradient rounded-full animate-[scaleIn_0.5s_0.15s_ease-out_both]"
           aria-hidden="true"
         />
 
-        {/* Official Slogan — Smaller than brand logo */}
+        {/* Official Arabic Slogan Underneath Helal Media Production */}
         <p
-          dir="ltr"
-          className="text-sm sm:text-lg md:text-xl uppercase tracking-[0.24em] text-brand-gradient font-bold animate-[fadeInUp_0.55s_0.2s_ease-out_both]"
+          dir="rtl"
+          data-testid="intro-slogan-ar"
+          className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-gradient font-arabic tracking-wide animate-[fadeInUp_0.55s_0.2s_ease-out_both]"
         >
-          Marketing Has No Catalog
+          التسويق ملوش كتالوج
         </p>
-
-        {lang === "ar" && (
-          <p
-            dir="rtl"
-            className="mt-2.5 text-sm sm:text-base text-pewter font-arabic animate-[fadeInUp_0.55s_0.28s_ease-out_both]"
-          >
-            {copy.intro.slogan}
-          </p>
-        )}
       </div>
 
       {/* Accessible Skip Control */}
@@ -114,7 +113,7 @@ export function IntroOverlay({ lang }: { lang: Locale }) {
         type="button"
         onClick={dismiss}
         data-testid="intro-skip-button"
-        className="absolute bottom-8 right-8 z-20 rounded-full border border-white/20 bg-white/[0.04] px-5 py-2 text-xs font-semibold uppercase tracking-widest text-alabaster/85 transition hover:border-brandBlue hover:text-brandBlue focus:outline-none focus-visible:ring-2 focus-visible:ring-brandBlue"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 rounded-full border border-white/20 bg-white/[0.04] px-5 py-2 text-xs font-semibold uppercase tracking-widest text-alabaster/85 transition hover:border-brandBlue hover:text-brandBlue focus:outline-none focus-visible:ring-2 focus-visible:ring-brandBlue"
       >
         {copy.intro.skip}
       </button>

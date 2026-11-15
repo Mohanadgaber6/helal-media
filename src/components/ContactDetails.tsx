@@ -13,9 +13,18 @@ export function ContactDetails({ lang }: { lang: Locale }) {
     >
       {/* Large Editorial Hero Statement */}
       <div className="space-y-6">
-        <span className="inline-block rounded-full border border-brandBlue/40 bg-brand-gradient-subtle px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-brandBlue">
-          {copy.nav.contact}
-        </span>
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="inline-block rounded-full border border-brandBlue/40 bg-brand-gradient-subtle px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-brandBlue">
+            {copy.nav.contact}
+          </span>
+          <span
+            dir="rtl"
+            data-testid="contact-slogan-ar"
+            className="inline-block font-arabic text-base sm:text-lg font-extrabold text-brand-gradient"
+          >
+            التسويق ملوش كتالوج
+          </span>
+        </div>
 
         {/*
           Section 9 Contact Hero:
