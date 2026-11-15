@@ -123,8 +123,8 @@ export function ContactDetails({ lang }: { lang: Locale }) {
           </div>
         </div>
 
-        {/* Official Social Media Icons + Availability */}
-        <div className="grid grid-cols-1 gap-6 border-t border-white/10 pt-6 sm:grid-cols-2">
+        {/* Official Social Media Icons */}
+        <div className="border-t border-white/10 pt-6">
           <div>
             <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-pewter mb-3">
               {copy.contactPage.infoLabels.followUs}
@@ -152,22 +152,6 @@ export function ContactDetails({ lang }: { lang: Locale }) {
                 <FacebookIcon />
               </a>
             </div>
-          </div>
-
-          <div>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-pewter mb-3">
-              {copy.contactPage.infoLabels.availability}
-            </h2>
-            <p
-              data-testid="contact-availability"
-              className="inline-flex items-center gap-2.5 text-sm sm:text-base font-medium text-alabaster"
-            >
-              <span
-                className="h-2.5 w-2.5 rounded-full bg-brand-gradient"
-                aria-hidden="true"
-              />
-              <span>{BUSINESS_CONFIG.availability[lang]}</span>
-            </p>
           </div>
         </div>
       </div>

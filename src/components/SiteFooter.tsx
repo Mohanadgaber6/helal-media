@@ -153,14 +153,6 @@ export function SiteFooter({ lang }: { lang: Locale }) {
                 </a>
               </div>
             </div>
-
-            <p className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-pewter">
-              <span
-                className="h-2 w-2 rounded-full bg-brand-gradient"
-                aria-hidden="true"
-              />
-              <span>{copy.footer.openByAppointment}</span>
-            </p>
           </div>
         </div>
 

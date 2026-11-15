@@ -68,8 +68,8 @@ export const BUSINESS_CONFIG = {
   whatsappUrl:
     process.env.NEXT_PUBLIC_WHATSAPP_URL || "https://wa.me/201055515576",
   availability: {
-    en: "Open by appointment",
-    ar: "نستقبلكم بمواعيد مسبقة",
+    en: "",
+    ar: "",
   },
 } as const;
 
@@ -1017,7 +1017,7 @@ export const SITE_COPY = {
       navigateHeading: "NAVIGATE",
       getInTouchHeading: "GET IN TOUCH",
       followUs: "Follow us",
-      openByAppointment: "Open by appointment",
+      openByAppointment: "",
       copyright: "2026 Helal Media. All rights reserved",
       signature: "Strategy · Creativity · Production",
     },
@@ -1217,7 +1217,7 @@ export const SITE_COPY = {
       navigateHeading: "تصفح الموقع",
       getInTouchHeading: "تواصل معنا",
       followUs: "تابعنا",
-      openByAppointment: "نستقبلكم بمواعيد مسبقة",
+      openByAppointment: "",
       copyright: "2026 هلال ميديا. جميع الحقوق محفوظة.",
       signature: "استراتيجية · إبداع · إنتاج",
     },

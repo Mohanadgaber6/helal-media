@@ -152,7 +152,7 @@ test.describe("Helal Media Production — Full Acceptance Matrix (EN & AR)", () 
     );
     await expect(page.getByTestId("footer-whatsapp-+201080645590")).toHaveCount(0);
 
-    await expect(footer).toContainText("Open by appointment");
+    await expect(footer).not.toContainText("Open by appointment");
     await expect(footer).toContainText("2026 Helal Media. All rights reserved");
     await expect(footer).toContainText("Strategy · Creativity · Production");
   });
